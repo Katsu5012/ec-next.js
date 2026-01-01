@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant User as ユーザー
+    participant PL as 商品一覧画面
+    participant QS as 購入数選択画面
+    participant Cart as カート画面
+    participant USP as useSelectedProduct
+    participant UC as useCart
+    participant LS as localStorage
+
+    User->>PL: 商品を閲覧
+    User->>PL: 商品を選択
+    PL->>USP: selectProduct(product, 1)
+    USP->>LS: 保存 (ec-selected-product)
+    USP-->>QS: 画面遷移
+    
+    User->>QS: 数量を3に変更
+    QS->>USP: updateQuantity(3)
+    USP->>LS: 更新 (ec-selected-product)
+    
+    User->>QS: カートに追加
+    QS->>UC: addToCart(product, 3)
+    UC->>LS: 保存 (ec-cart-items)
+    QS->>USP: clearSelection()
+    USP->>LS: 削除 (ec-selected-product)
+    USP-->>Cart: 画面遷移
+    
+    User->>Cart: 商品数量を変更
+    Cart->>UC: updateCartItemQuantity(id, 5)
+    UC->>LS: 更新 (ec-cart-items)
+    
+    Note over User,LS: リロード発生
+    
+    Cart->>UC: 初期化（読み込み）
+    UC->>LS: 読み込み (ec-cart-items)
+    LS-->>UC: カートデータ復元
+    UC-->>Cart: 表示更新

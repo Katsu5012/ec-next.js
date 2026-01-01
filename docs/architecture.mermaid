@@ -1,0 +1,36 @@
+graph TB
+    subgraph "UIレイヤー"
+        A[商品一覧画面<br/>ProductList]
+        B[購入数選択画面<br/>QuantitySelection]
+        C[カート画面<br/>Cart]
+        H[ヘッダー<br/>Header]
+    end
+    
+    subgraph "ビジネスロジック層（Custom Hooks）"
+        D[useSelectedProduct<br/>選択中の商品管理]
+        E[useCart<br/>カート管理]
+    end
+    
+    subgraph "永続化層"
+        F[useLocalStorage<br/>localStorage同期]
+        G[(localStorage)]
+    end
+    
+    A -->|商品選択| D
+    B -->|数量調整| D
+    B -->|カート追加| E
+    C -->|カート操作| E
+    H -->|総数取得| E
+    
+    D -->|永続化| F
+    E -->|永続化| F
+    F <-->|読み書き| G
+    
+    style A fill:#e3f2fd
+    style B fill:#e3f2fd
+    style C fill:#e3f2fd
+    style H fill:#e3f2fd
+    style D fill:#fff3e0
+    style E fill:#fff3e0
+    style F fill:#f3e5f5
+    style G fill:#f3e5f5

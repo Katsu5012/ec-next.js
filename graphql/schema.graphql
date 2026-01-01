@@ -1,0 +1,34 @@
+type Product {
+  id: ID!
+  name: String!
+  price: Int!
+  imageUrl: String!
+  stock: Int!
+  description: String
+}
+
+type CartItem {
+  product: Product!
+  quantity: Int!
+  addedAt: String!
+}
+
+input AddToCartInput {
+  productId: ID!
+  quantity: Int!
+}
+
+type AddToCartPayload {
+  success: Boolean!
+  message: String
+  cartItem: CartItem
+}
+
+type Query {
+  products: [Product!]!
+  product(id: ID!): Product
+}
+
+type Mutation {
+  addToCart(input: AddToCartInput!): AddToCartPayload!
+}
