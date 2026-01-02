@@ -31,4 +31,21 @@ type Query {
 
 type Mutation {
   addToCart(input: AddToCartInput!): AddToCartPayload!
+  login(input: LoginInput!): LoginResponse!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
 }

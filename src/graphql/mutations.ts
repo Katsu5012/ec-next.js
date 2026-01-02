@@ -1,4 +1,4 @@
-import { gql } from 'urql';
+import { gql } from "urql";
 
 export const ADD_TO_CART_MUTATION = gql`
   mutation AddToCart($input: AddToCartInput!) {
@@ -20,3 +20,16 @@ export const ADD_TO_CART_MUTATION = gql`
     }
   }
 `;
+
+export const LOGIN = gql(`
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      token
+      user {
+        id
+        email
+        name
+      }
+    }
+  }
+`);

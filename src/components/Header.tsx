@@ -2,11 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCart } from "../hooks/useCart";
+import { useAuth } from "../hooks/useAuth";
 
 export const Header: React.FC = () => {
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
   const router = useRouter();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   // 現在のパスからページを判定
   const currentPage =
@@ -79,6 +86,7 @@ export const Header: React.FC = () => {
             {/* カートアイコン */}
             <Link
               href="/cart"
+              suppressHydrationWarning
               className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <svg
@@ -100,6 +108,19 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </Link>
+
+            {/* ユーザー情報 */}
+            {user && (
+              <div className="flex items-center space-x-4">
+                <span className="text-sm">{user.name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm hover:text-blue-200 transition-colors"
+                >
+                  ログアウト
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       </div>
