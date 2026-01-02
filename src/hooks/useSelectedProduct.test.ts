@@ -20,7 +20,7 @@ describe('useSelectedProduct', () => {
 
   it('商品を選択できるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 2);
     });
@@ -33,11 +33,11 @@ describe('useSelectedProduct', () => {
 
   it('購入数を更新できるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 1);
     });
-    
+
     act(() => {
       result.current.updateQuantity(5);
     });
@@ -47,11 +47,11 @@ describe('useSelectedProduct', () => {
 
   it('購入数を増やせるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 3);
     });
-    
+
     act(() => {
       result.current.incrementQuantity();
     });
@@ -61,11 +61,11 @@ describe('useSelectedProduct', () => {
 
   it('購入数を減らせるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 3);
     });
-    
+
     act(() => {
       result.current.decrementQuantity();
     });
@@ -75,11 +75,11 @@ describe('useSelectedProduct', () => {
 
   it('在庫数を超える購入数は設定できないべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 5);
     });
-    
+
     act(() => {
       result.current.updateQuantity(15);
     });
@@ -90,11 +90,11 @@ describe('useSelectedProduct', () => {
 
   it('購入数が1未満にはならないべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 1);
     });
-    
+
     act(() => {
       result.current.decrementQuantity();
     });
@@ -105,11 +105,11 @@ describe('useSelectedProduct', () => {
 
   it('在庫数まで増やせるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 9);
     });
-    
+
     act(() => {
       result.current.incrementQuantity();
     });
@@ -119,11 +119,11 @@ describe('useSelectedProduct', () => {
 
   it('在庫数を超えて増やせないべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 10);
     });
-    
+
     act(() => {
       result.current.incrementQuantity();
     });
@@ -134,11 +134,11 @@ describe('useSelectedProduct', () => {
 
   it('選択をクリアできるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 1);
     });
-    
+
     act(() => {
       result.current.clearSelection();
     });
@@ -148,14 +148,14 @@ describe('useSelectedProduct', () => {
 
   it('localStorageに保存されるべき', () => {
     const { result } = renderHook(() => useSelectedProduct());
-    
+
     act(() => {
       result.current.selectProduct(mockProduct, 3);
     });
 
     const stored = localStorage.getItem('ec-selected-product');
     expect(stored).toBeTruthy();
-    
+
     const parsed = JSON.parse(stored!);
     expect(parsed.quantity).toBe(3);
     expect(parsed.product.id).toBe('1');

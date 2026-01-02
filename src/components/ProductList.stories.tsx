@@ -51,12 +51,12 @@ export const SingleProduct: Story = {
 
 export const OutOfStock: Story = {
   args: {
-    products: mockProducts.map(p => ({ ...p, stock: 0 })),
+    products: mockProducts.map((p) => ({ ...p, stock: 0 })),
   },
 };
 
 export const LimitedStock: Story = {
   args: {
-    products: mockProducts.map(p => ({ ...p, stock: 2 })),
+    products: mockProducts.map((p) => ({ ...p, stock: 2 })),
   },
 };

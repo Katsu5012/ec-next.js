@@ -1,17 +1,17 @@
-import "@testing-library/jest-dom";
-import { cleanup } from "@testing-library/react";
-import { beforeAll, afterEach, afterAll, beforeEach } from "vitest";
-import { server } from "../mocks/server";
+import '@testing-library/jest-dom';
+import { cleanup } from '@testing-library/react';
+import { beforeAll, afterEach, afterAll, beforeEach } from 'vitest';
+import { server } from '../mocks/server';
 
 // src/test/setup.ts
-import { vi } from "vitest";
+import { vi } from 'vitest';
 
-vi.mock("next/router", () => ({
+vi.mock('next/router', () => ({
   useRouter: vi.fn(() => ({
-    pathname: "/",
-    route: "/",
+    pathname: '/',
+    route: '/',
     query: {},
-    asPath: "/",
+    asPath: '/',
     push: vi.fn(),
     replace: vi.fn(),
     reload: vi.fn(),
@@ -33,7 +33,7 @@ vi.mock("next/router", () => ({
 
 // MSW server setup
 beforeAll(() => {
-  server.listen({ onUnhandledRequest: "error" });
+  server.listen({ onUnhandledRequest: 'error' });
 });
 
 // 各テスト前にクリーンアップ（前のテストの影響を排除）

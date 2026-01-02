@@ -1,23 +1,15 @@
-import React from "react";
-import { useSelectedProduct } from "../hooks/useSelectedProduct";
-import { useCart } from "../hooks/useCart";
+import React from 'react';
+import { useSelectedProduct } from '../hooks/useSelectedProduct';
+import { useCart } from '../hooks/useCart';
 
 interface QuantitySelectionProps {
   onComplete: () => void;
   onCancel: () => void;
 }
 
-export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
-  onComplete,
-  onCancel,
-}) => {
-  const {
-    selectedProduct,
-    updateQuantity,
-    incrementQuantity,
-    decrementQuantity,
-    clearSelection,
-  } = useSelectedProduct();
+export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete, onCancel }) => {
+  const { selectedProduct, updateQuantity, incrementQuantity, decrementQuantity, clearSelection } =
+    useSelectedProduct();
 
   const { addToCart, getCartItemQuantity } = useCart();
 
@@ -64,6 +56,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
         <div className="md:flex">
           {/* 商品画像 */}
           <div className="md:w-1/2">
+            {/*  eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={product.imageUrl}
               alt={product.name}
@@ -73,13 +66,9 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
 
           {/* 商品情報・数量選択 */}
           <div className="md:w-1/2 p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {product.name}
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h2>
 
-            {product.description && (
-              <p className="text-gray-600 mb-4">{product.description}</p>
-            )}
+            {product.description && <p className="text-gray-600 mb-4">{product.description}</p>}
 
             <div className="mb-6">
               <div className="flex items-baseline gap-2 mb-2">
@@ -108,9 +97,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span className="text-sm font-semibold text-blue-900">
-                    カート内の状態
-                  </span>
+                  <span className="text-sm font-semibold text-blue-900">カート内の状態</span>
                 </div>
                 <p className="text-sm text-blue-800">
                   この商品は既に{cartQuantity}個カートに入っています
@@ -124,7 +111,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
             {/* 数量選択 */}
             <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-3">
-                {hasInCart ? "追加する数量" : "購入数"}
+                {hasInCart ? '追加する数量' : '購入数'}
               </label>
 
               <div className="flex items-center gap-3">
@@ -154,16 +141,14 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
                 </button>
               </div>
 
-              <p className="text-sm text-gray-500 mt-2">
-                最大 {product.stock}個まで選択できます
-              </p>
+              <p className="text-sm text-gray-500 mt-2">最大 {product.stock}個まで選択できます</p>
             </div>
 
             {/* 合計金額 */}
             <div className="bg-gray-50 rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-700 font-semibold">
-                  {hasInCart ? "追加分の小計" : "小計"}
+                  {hasInCart ? '追加分の小計' : '小計'}
                 </span>
                 <span className="text-2xl font-bold text-gray-900">
                   ¥{totalPrice.toLocaleString()}
@@ -173,11 +158,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
                 <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
                   <span className="text-gray-600">カート追加後の合計</span>
                   <span className="font-bold text-gray-900">
-                    ¥
-                    {(
-                      (cartQuantity + quantity) *
-                      product.price
-                    ).toLocaleString()}
+                    ¥{((cartQuantity + quantity) * product.price).toLocaleString()}
                   </span>
                 </div>
               )}
@@ -189,7 +170,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({
                 onClick={handleAddToCart}
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
               >
-                {hasInCart ? "カートに追加" : "カートに追加"}
+                {hasInCart ? 'カートに追加' : 'カートに追加'}
               </button>
 
               <button

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 /**
  * localStorageと同期するカスタムhook
@@ -6,7 +6,7 @@ import { useState, useCallback } from "react";
 export function useLocalStorage<T>(key: string, initialValue: T) {
   // 初期値の取得（localStorageから、なければinitialValue）
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return initialValue;
     }
     try {
@@ -23,10 +23,9 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     (value: T | ((val: T) => T)) => {
       try {
         setStoredValue((prevValue) => {
-          const valueToStore =
-            value instanceof Function ? value(prevValue) : value;
+          const valueToStore = value instanceof Function ? value(prevValue) : value;
 
-          if (typeof window !== "undefined") {
+          if (typeof window !== 'undefined') {
             // null または undefined の場合は削除
             if (valueToStore === null || valueToStore === undefined) {
               window.localStorage.removeItem(key);

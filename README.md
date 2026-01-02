@@ -54,6 +54,7 @@ npm run codegen
 ## ⚙️ 初回セットアップ
 
 ### 1. 依存関係のインストール
+
 ```bash
 npm install
 ```
@@ -67,6 +68,7 @@ npm run msw:init
 ```
 
 このコマンドは以下の2つのディレクトリにService Workerを生成します：
+
 - `public/mockServiceWorker.js` - Next.js用
 - `.storybook/public/mockServiceWorker.js` - Storybook用
 
@@ -93,12 +95,14 @@ npm run storybook
 ### GraphQL統合
 
 #### クエリ例
+
 ```typescript
 const [result] = useQuery({ query: GET_PRODUCTS });
 const { data, fetching, error } = result;
 ```
 
 #### ミューテーション例
+
 ```typescript
 const [, addToCart] = useMutation(ADD_TO_CART_MUTATION);
 await addToCart({ input: { productId, quantity } });
@@ -250,18 +254,22 @@ npm run storybook
 ### 主要な変更点
 
 #### Tailwind CSS 4
+
 - PostCSS設定が変更: `@tailwindcss/postcss`プラグインを使用
 - 設定ファイルがTypeScriptに対応
 
 #### React 19
+
 - 最新のReact機能に対応
 - より厳格な型チェック
 
 #### Next.js 16
+
 - Pages Routerの安定版
 - パフォーマンス最適化
 
 #### Storybook 10
+
 - 最新のUI/UX改善
 - Next.jsとの統合強化
 
@@ -272,6 +280,7 @@ npm run storybook
 **原因**: MSW Service Workerが初期化されていません。
 
 **解決方法**:
+
 ```bash
 npm run msw:init
 ```
@@ -282,7 +291,8 @@ npm run msw:init
 
 **原因**: Next.jsのrouterが正しく設定されていない可能性があります。
 
-**解決方法**: 
+**解決方法**:
+
 1. `@storybook/nextjs`がインストールされているか確認
 2. `.storybook/preview.ts`に以下が設定されているか確認：
 
@@ -308,6 +318,7 @@ parameters: {
 ### GraphQLクエリの型が生成されない
 
 **解決方法**:
+
 ```bash
 npm run codegen
 ```

@@ -21,18 +21,19 @@ export const ProductList: React.FC<ProductListProps> = ({ products }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-gray-900">商品一覧</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => {
           const cartQuantity = getCartItemQuantity(product.id);
           const inCart = isInCart(product.id);
-          
+
           return (
             <div
               key={product.id}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
               <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={product.imageUrl}
                   alt={product.name}
@@ -44,27 +45,21 @@ export const ProductList: React.FC<ProductListProps> = ({ products }) => {
                   </div>
                 )}
               </div>
-              
+
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {product.name}
-                </h3>
-                
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
+
                 {product.description && (
-                  <p className="text-gray-600 text-sm mb-3">
-                    {product.description}
-                  </p>
+                  <p className="text-gray-600 text-sm mb-3">{product.description}</p>
                 )}
-                
+
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-2xl font-bold text-gray-900">
                     ¥{product.price.toLocaleString()}
                   </span>
-                  <span className="text-sm text-gray-500">
-                    在庫: {product.stock}個
-                  </span>
+                  <span className="text-sm text-gray-500">在庫: {product.stock}個</span>
                 </div>
-                
+
                 <button
                   onClick={() => handleSelectProduct(product)}
                   disabled={product.stock === 0}

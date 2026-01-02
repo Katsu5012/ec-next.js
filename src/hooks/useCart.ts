@@ -1,26 +1,20 @@
-import { useLocalStorage } from "./useLocalStorage";
-import { CartItem, Product } from "../types";
-import { useCallback } from "react";
+import { useLocalStorage } from './useLocalStorage';
+import { CartItem, Product } from '../types';
 
 /**
  * カート管理のhook
  * カート内の商品リストを永続的に管理
  */
 export function useCart() {
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    "ec-cart-items",
-    []
-  );
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('ec-cart-items', []);
 
   /**
    * カートに商品を追加
    */
-  const addToCart = useCallback((product: Product, quantity: number) => {
+  const addToCart = (product: Product, quantity: number) => {
     setCartItems((prevItems) => {
       // 既に同じ商品がカートにある場合は数量を更新
-      const existingItemIndex = prevItems.findIndex(
-        (item) => item.product.id === product.id
-      );
+      const existingItemIndex = prevItems.findIndex((item) => item.product.id === product.id);
 
       if (existingItemIndex > -1) {
         const newItems = [...prevItems];
@@ -45,15 +39,13 @@ export function useCart() {
         },
       ];
     });
-  }, []);
+  };
 
   /**
    * カートから商品を削除
    */
   const removeFromCart = (productId: string) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.product.id !== productId)
-    );
+    setCartItems((prevItems) => prevItems.filter((item) => item.product.id !== productId));
   };
 
   /**
@@ -95,10 +87,7 @@ export function useCart() {
    * カートの合計金額
    */
   const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
+    return cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
   };
 
   /**

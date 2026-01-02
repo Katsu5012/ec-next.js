@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Provider as UrqlProvider } from "urql";
-import { Cart } from "./Cart";
-import { mockProducts } from "../data/products";
-import { useEffect } from "react";
-import { useCart } from "../hooks/useCart";
-import { createUrqlClient } from "../lib/urql";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Provider as UrqlProvider } from 'urql';
+import { Cart } from './Cart';
+import { mockProducts } from '../data/products';
+import { useEffect } from 'react';
+import { useCart } from '../hooks/useCart';
+import { createUrqlClient } from '../lib/urql';
 
 const urqlClient = createUrqlClient();
 
 const meta = {
-  title: "Components/Cart",
+  title: 'Components/Cart',
   component: Cart,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     nextjs: {
       appDirectory: false,
       navigation: {
-        pathname: "/cart",
+        pathname: '/cart',
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <UrqlProvider value={urqlClient}>
@@ -33,11 +33,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-type StoryWithoutArgs = Omit<Story, "args">;
+type StoryWithoutArgs = Omit<Story, 'args'>;
 
 export const EmptyCart: Story = {
   args: {
-    onContinueShopping: () => alert("買い物を続ける"),
+    onContinueShopping: () => alert('買い物を続ける'),
   },
 };
 
@@ -52,7 +52,7 @@ const CartWithItemsWrapper = ({ itemCount = 2 }: { itemCount?: number }) => {
     }
   }, [itemCount]);
 
-  return <Cart onContinueShopping={() => alert("買い物を続ける")} />;
+  return <Cart onContinueShopping={() => alert('買い物を続ける')} />;
 };
 
 export const WithItems: StoryWithoutArgs = {
@@ -78,6 +78,6 @@ export const FullCart: StoryWithoutArgs = {
       });
     }, []);
 
-    return <Cart onContinueShopping={() => alert("買い物を続ける")} />;
+    return <Cart onContinueShopping={() => alert('買い物を続ける')} />;
   },
 };

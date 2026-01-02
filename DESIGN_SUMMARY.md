@@ -18,15 +18,15 @@
 
 ## 📊 状態管理の比較表
 
-| 項目 | useSelectedProduct | useCart |
-|------|-------------------|---------|
-| **保存先** | localStorage | localStorage |
-| **キー** | `ec-selected-product` | `ec-cart-items` |
-| **データ型** | `SelectedProduct \| null` | `CartItem[]` |
-| **保持数** | 0〜1個 | 0〜N個 |
-| **ライフサイクル** | 選択中のみ | 永続的 |
-| **クリアタイミング** | カート追加時 | ユーザー操作 |
-| **主な用途** | 購入数決定前の一時保持 | 購入予定商品の管理 |
+| 項目                 | useSelectedProduct        | useCart            |
+| -------------------- | ------------------------- | ------------------ |
+| **保存先**           | localStorage              | localStorage       |
+| **キー**             | `ec-selected-product`     | `ec-cart-items`    |
+| **データ型**         | `SelectedProduct \| null` | `CartItem[]`       |
+| **保持数**           | 0〜1個                    | 0〜N個             |
+| **ライフサイクル**   | 選択中のみ                | 永続的             |
+| **クリアタイミング** | カート追加時              | ユーザー操作       |
+| **主な用途**         | 購入数決定前の一時保持    | 購入予定商品の管理 |
 
 ## 🔑 設計判断の理由
 
@@ -44,6 +44,7 @@ const useCart = () => {
 ```
 
 **問題点：**
+
 - 関心事が混在（一時状態 vs 永続状態）
 - テストが困難
 - 再利用性が低い
@@ -53,11 +54,16 @@ const useCart = () => {
 
 ```typescript
 // 良い例：関心事ごとに分離
-const useSelectedProduct = () => { /* 一時状態 */ };
-const useCart = () => { /* 永続状態 */ };
+const useSelectedProduct = () => {
+  /* 一時状態 */
+};
+const useCart = () => {
+  /* 永続状態 */
+};
 ```
 
 **利点：**
+
 - 単一責任の原則に従う
 - 各hooksが独立してテスト可能
 - 状態のライフサイクルが明確
@@ -70,12 +76,13 @@ const useCart = () => { /* 永続状態 */ };
 ```typescript
 // ProductList.tsx
 const handleSelectProduct = (product: Product) => {
-  selectProduct(product, 1);  // useSelectedProductに保存
+  selectProduct(product, 1); // useSelectedProductに保存
   setCurrentPage('quantity');
 };
 ```
 
 **状態：**
+
 ```json
 {
   "ec-selected-product": {
@@ -90,11 +97,12 @@ const handleSelectProduct = (product: Product) => {
 ```typescript
 // QuantitySelection.tsx
 const handleQuantityChange = (newQuantity: number) => {
-  updateQuantity(newQuantity);  // useSelectedProductを更新
+  updateQuantity(newQuantity); // useSelectedProductを更新
 };
 ```
 
 **状態：**
+
 ```json
 {
   "ec-selected-product": {
@@ -109,13 +117,14 @@ const handleQuantityChange = (newQuantity: number) => {
 ```typescript
 // QuantitySelection.tsx
 const handleAddToCart = () => {
-  addToCart(product, quantity);  // useCartに追加
-  clearSelection();              // useSelectedProductをクリア
+  addToCart(product, quantity); // useCartに追加
+  clearSelection(); // useSelectedProductをクリア
   onComplete();
 };
 ```
 
 **状態変化：**
+
 ```json
 // ec-selected-product: null (クリアされた)
 // ec-cart-items:
@@ -145,13 +154,11 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   // ✅ 型安全な更新関数
   const setValue = (value: T | ((val: T) => T)) => {
     // 関数型更新にも対応
-    const valueToStore = value instanceof Function 
-      ? value(storedValue) 
-      : value;
+    const valueToStore = value instanceof Function ? value(storedValue) : value;
     // ...
   };
 
-  return [storedValue, setValue] as const;  // ✅ as constで型推論を強化
+  return [storedValue, setValue] as const; // ✅ as constで型推論を強化
 }
 ```
 
@@ -161,9 +168,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 const addToCart = (product: Product, quantity: number) => {
   setCartItems((prevItems) => {
     // ✅ 既存商品チェック
-    const existingItemIndex = prevItems.findIndex(
-      (item) => item.product.id === product.id
-    );
+    const existingItemIndex = prevItems.findIndex((item) => item.product.id === product.id);
 
     if (existingItemIndex > -1) {
       // ✅ 数量加算（在庫制限付き）
@@ -234,21 +239,23 @@ describe('useSelectedProduct', () => {
 ### 1. カート内商品数バッジ
 
 ```tsx
-{totalItems > 0 && (
-  <span className="absolute -top-1 -right-1 bg-red-600 text-white ...">
-    {totalItems > 99 ? '99+' : totalItems}
-  </span>
-)}
+{
+  totalItems > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-600 text-white ...">
+      {totalItems > 99 ? '99+' : totalItems}
+    </span>
+  );
+}
 ```
 
 ### 2. ページフロー表示
 
 ```tsx
-<span className={`px-3 py-1 rounded-full ${
-  currentPage === 'products' 
-    ? 'bg-blue-600 text-white' 
-    : 'bg-gray-200 text-gray-600'
-}`}>
+<span
+  className={`px-3 py-1 rounded-full ${
+    currentPage === 'products' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+  }`}
+>
   商品一覧
 </span>
 ```
@@ -258,9 +265,10 @@ describe('useSelectedProduct', () => {
 ```tsx
 <button
   disabled={product.stock === 0}
-  className={product.stock === 0 
-    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-    : 'bg-blue-600 text-white hover:bg-blue-700'
+  className={
+    product.stock === 0
+      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+      : 'bg-blue-600 text-white hover:bg-blue-700'
   }
 >
   {product.stock === 0 ? '在庫切れ' : '購入数を選択'}

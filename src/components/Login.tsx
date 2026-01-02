@@ -1,15 +1,15 @@
 // src/components/Login.tsx
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useAuth } from "../hooks/useAuth";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useAuth } from '../hooks/useAuth';
 
 const loginSchema = z.object({
   email: z
-    .email("有効なメールアドレスを入力してください")
-    .min(1, "メールアドレスを入力してください"),
-  password: z.string().min(6, "パスワードは6文字以上で入力してください"),
+    .email('有効なメールアドレスを入力してください')
+    .min(1, 'メールアドレスを入力してください'),
+  password: z.string().min(6, 'パスワードは6文字以上で入力してください'),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -20,7 +20,7 @@ interface LoginProps {
 
 export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   const { login, isLoading } = useAuth();
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<string>('');
 
   const {
     register,
@@ -31,13 +31,13 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    setServerError("");
+    setServerError('');
     const result = await login(data);
 
     if (result.success) {
       onSuccess?.();
     } else {
-      setServerError(result.error || "ログインに失敗しました");
+      setServerError(result.error || 'ログインに失敗しました');
     }
   };
 
@@ -48,60 +48,46 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             アカウントにログイン
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            ECサイトへようこそ
-          </p>
+          <p className="mt-2 text-center text-sm text-gray-600">ECサイトへようこそ</p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="rounded-md shadow-sm space-y-4">
             {/* メールアドレス */}
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 メールアドレス
               </label>
               <input
-                {...register("email")}
+                {...register('email')}
                 id="email"
                 // type="email"
                 autoComplete="email"
                 className={`appearance-none relative block w-full px-3 py-2 border ${
-                  errors.email ? "border-red-300" : "border-gray-300"
+                  errors.email ? 'border-red-300' : 'border-gray-300'
                 } placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                 placeholder="example@email.com"
               />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.email.message}
-                </p>
-              )}
+              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
             </div>
 
             {/* パスワード */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 パスワード
               </label>
               <input
-                {...register("password")}
+                {...register('password')}
                 id="password"
                 type="password"
                 autoComplete="current-password"
                 className={`appearance-none relative block w-full px-3 py-2 border ${
-                  errors.password ? "border-red-300" : "border-gray-300"
+                  errors.password ? 'border-red-300' : 'border-gray-300'
                 } placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
                 placeholder="••••••••"
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.password.message}
-                </p>
+                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
               )}
             </div>
           </div>
@@ -163,7 +149,7 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
                   ログイン中...
                 </span>
               ) : (
-                "ログイン"
+                'ログイン'
               )}
             </button>
           </div>
@@ -171,9 +157,7 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
           {/* デモ用情報 */}
           <div className="text-center">
             <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <p className="text-xs text-blue-800 font-semibold mb-2">
-                デモ用アカウント
-              </p>
+              <p className="text-xs text-blue-800 font-semibold mb-2">デモ用アカウント</p>
               <p className="text-xs text-blue-700">
                 メール: demo@example.com
                 <br />
