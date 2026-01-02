@@ -6,7 +6,7 @@ import "@/styles/globals.css";
 const urqlClient = createUrqlClient();
 
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  const { worker } = require("../src/mocks/browser");
+  const { worker } = require("../mocks/browser");
   worker.start({
     onUnhandledRequest: "bypass", // モックされていないリクエストは通す
   });
