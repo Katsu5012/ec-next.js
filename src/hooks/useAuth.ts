@@ -1,19 +1,16 @@
 // src/hooks/useAuth.ts
-import { useState, useCallback } from "react";
-import { useLocalStorage } from "./useLocalStorage";
-import type { User, LoginInput, AuthState, LoginResult } from "../types/auth";
-import { useMutation } from "urql";
-import { LOGIN } from "../graphql/mutations";
+import { useCallback } from 'react';
+import { useLocalStorage } from './useLocalStorage';
+import type { LoginInput, AuthState, LoginResult } from '../types/auth';
+import { useMutation } from 'urql';
+import { LOGIN } from '../graphql/mutations';
 
 export function useAuth() {
-  const [authState, setAuthState] = useLocalStorage<AuthState | null>(
-    "auth-state",
-    {
-      user: null,
-      token: null,
-      isAuthenticated: false,
-    }
-  );
+  const [authState, setAuthState] = useLocalStorage<AuthState | null>('auth-state', {
+    user: null,
+    token: null,
+    isAuthenticated: false,
+  });
 
   const [loginResult, executeLogin] = useMutation(LOGIN);
 
@@ -33,7 +30,7 @@ export function useAuth() {
 
       return {
         success: false,
-        error: result.error?.message || "ログインに失敗しました",
+        error: result.error?.message || 'ログインに失敗しました',
       };
     },
     [executeLogin, setAuthState]

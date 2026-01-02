@@ -27,7 +27,7 @@ describe('useCart', () => {
 
   it('商品をカートに追加できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
     });
@@ -39,7 +39,7 @@ describe('useCart', () => {
 
   it('複数の異なる商品を追加できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 1);
       result.current.addToCart(mockProduct2, 3);
@@ -50,7 +50,7 @@ describe('useCart', () => {
 
   it('同じ商品を追加すると数量が加算されるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
       result.current.addToCart(mockProduct1, 3);
@@ -62,7 +62,7 @@ describe('useCart', () => {
 
   it('在庫数を超えて追加できないべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 8);
       result.current.addToCart(mockProduct1, 5);
@@ -74,12 +74,12 @@ describe('useCart', () => {
 
   it('商品をカートから削除できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
       result.current.addToCart(mockProduct2, 1);
     });
-    
+
     act(() => {
       result.current.removeFromCart('1');
     });
@@ -90,11 +90,11 @@ describe('useCart', () => {
 
   it('カート内の商品数量を更新できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
     });
-    
+
     act(() => {
       result.current.updateCartItemQuantity('1', 5);
     });
@@ -104,11 +104,11 @@ describe('useCart', () => {
 
   it('数量を0にすると商品が削除されるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
     });
-    
+
     act(() => {
       result.current.updateCartItemQuantity('1', 0);
     });
@@ -118,12 +118,12 @@ describe('useCart', () => {
 
   it('カートをクリアできるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2);
       result.current.addToCart(mockProduct2, 1);
     });
-    
+
     act(() => {
       result.current.clearCart();
     });
@@ -133,7 +133,7 @@ describe('useCart', () => {
 
   it('総アイテム数を計算できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 3);
       result.current.addToCart(mockProduct2, 2);
@@ -144,7 +144,7 @@ describe('useCart', () => {
 
   it('合計金額を計算できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 2); // 1000 * 2 = 2000
       result.current.addToCart(mockProduct2, 3); // 2000 * 3 = 6000
@@ -155,7 +155,7 @@ describe('useCart', () => {
 
   it('商品がカートに入っているか確認できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 1);
     });
@@ -166,7 +166,7 @@ describe('useCart', () => {
 
   it('カート内の特定商品の数量を取得できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 5);
     });
@@ -177,14 +177,14 @@ describe('useCart', () => {
 
   it('localStorageに保存されるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct1, 3);
     });
 
     const stored = localStorage.getItem('ec-cart-items');
     expect(stored).toBeTruthy();
-    
+
     const parsed = JSON.parse(stored!);
     expect(parsed).toHaveLength(1);
     expect(parsed[0].quantity).toBe(3);

@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useCart } from "../hooks/useCart";
-import { useAuth } from "../hooks/useAuth";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCart } from '../hooks/useCart';
+import { useAuth } from '../hooks/useAuth';
 
 export const Header: React.FC = () => {
   const { getTotalItems } = useCart();
@@ -12,26 +12,23 @@ export const Header: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    router.push("/login");
+    router.push('/login');
   };
 
   // 現在のパスからページを判定
   const currentPage =
-    router.pathname === "/cart"
-      ? "cart"
-      : router.pathname === "/quantity"
-      ? "quantity"
-      : "products";
+    router.pathname === '/cart'
+      ? 'cart'
+      : router.pathname === '/quantity'
+        ? 'quantity'
+        : 'products';
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* ロゴ・タイトル */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          >
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <svg
               className="w-8 h-8 text-blue-600"
               fill="none"
@@ -54,9 +51,9 @@ export const Header: React.FC = () => {
             <div className="hidden md:flex items-center gap-2 text-sm">
               <span
                 className={`px-3 py-1 rounded-full ${
-                  currentPage === "products"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-600"
+                  currentPage === 'products'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
                 }`}
               >
                 商品一覧
@@ -64,9 +61,9 @@ export const Header: React.FC = () => {
               <span className="text-gray-400">→</span>
               <span
                 className={`px-3 py-1 rounded-full ${
-                  currentPage === "quantity"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-600"
+                  currentPage === 'quantity'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
                 }`}
               >
                 購入数選択
@@ -74,9 +71,7 @@ export const Header: React.FC = () => {
               <span className="text-gray-400">→</span>
               <span
                 className={`px-3 py-1 rounded-full ${
-                  currentPage === "cart"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-600"
+                  currentPage === 'cart' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
                 }`}
               >
                 カート
@@ -104,7 +99,7 @@ export const Header: React.FC = () => {
               </svg>
               {totalItems > 0 && user && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {totalItems > 99 ? "99+" : totalItems}
+                  {totalItems > 99 ? '99+' : totalItems}
                 </span>
               )}
             </Link>

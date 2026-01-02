@@ -1,5 +1,6 @@
-import React from "react";
-import { useCart } from "../hooks/useCart";
+/* eslint-disable @next/next/no-img-element */
+import React from 'react';
+import { useCart } from '../hooks/useCart';
 
 interface CartProps {
   onContinueShopping: () => void;
@@ -35,9 +36,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            カートが空です
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">カートが空です</h2>
           <p className="text-gray-600 mb-6">商品を追加してください</p>
           <button
             onClick={onContinueShopping}
@@ -54,10 +53,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900">ショッピングカート</h1>
-        <button
-          onClick={clearCart}
-          className="text-red-600 hover:text-red-700 font-semibold"
-        >
+        <button onClick={clearCart} className="text-red-600 hover:text-red-700 font-semibold">
           カートを空にする
         </button>
       </div>
@@ -77,36 +73,26 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
 
             {/* 商品情報 */}
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                {item.product.name}
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.product.name}</h3>
               <p className="text-gray-600 text-sm mb-2">
                 ¥{item.product.price.toLocaleString()} / 個
               </p>
-              <p className="text-xs text-gray-500">
-                在庫: {item.product.stock}個
-              </p>
+              <p className="text-xs text-gray-500">在庫: {item.product.stock}個</p>
             </div>
 
             {/* 数量調整 */}
             <div className="flex items-center gap-2">
               <button
-                onClick={() =>
-                  updateCartItemQuantity(item.product.id, item.quantity - 1)
-                }
+                onClick={() => updateCartItemQuantity(item.product.id, item.quantity - 1)}
                 className="w-8 h-8 rounded border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors"
               >
                 -
               </button>
 
-              <span className="w-12 text-center font-semibold">
-                {item.quantity}
-              </span>
+              <span className="w-12 text-center font-semibold">{item.quantity}</span>
 
               <button
-                onClick={() =>
-                  updateCartItemQuantity(item.product.id, item.quantity + 1)
-                }
+                onClick={() => updateCartItemQuantity(item.product.id, item.quantity + 1)}
                 disabled={item.quantity >= item.product.stock}
                 className="w-8 h-8 rounded border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
@@ -127,12 +113,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
               className="text-red-600 hover:text-red-700 p-2"
               aria-label="削除"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -168,7 +149,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
         </button>
         <button
           className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          onClick={() => alert("購入処理は未実装です")}
+          onClick={() => alert('購入処理は未実装です')}
         >
           購入手続きへ
         </button>

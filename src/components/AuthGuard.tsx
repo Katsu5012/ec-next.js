@@ -1,7 +1,7 @@
 // src/components/AuthGuard.tsx
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "../hooks/useAuth";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from '../hooks/useAuth';
 
 interface AuthGuardProps {
   children: React.ReactNode;
@@ -14,6 +14,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   useEffect(() => {
     // 初回チェック完了
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsChecking(false);
   }, []);
 
@@ -54,12 +55,8 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
             </div>
 
             {/* メッセージ */}
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              ログインが必要です
-            </h2>
-            <p className="text-gray-600 mb-6">
-              このページを表示するには、ログインしてください
-            </p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">ログインが必要です</h2>
+            <p className="text-gray-600 mb-6">このページを表示するには、ログインしてください</p>
 
             {/* ログインボタン */}
             <button
@@ -70,9 +67,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
             </button>
 
             {/* 追加情報 */}
-            <p className="mt-4 text-sm text-gray-500">
-              ログイン後、このページに戻ります
-            </p>
+            <p className="mt-4 text-sm text-gray-500">ログイン後、このページに戻ります</p>
           </div>
         </div>
       </div>

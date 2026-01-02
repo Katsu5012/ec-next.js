@@ -46,10 +46,12 @@ npm run msw:init
 ```
 
 このコマンドは以下のファイルを生成します：
+
 - `public/mockServiceWorker.js` - Next.js開発サーバー用
 - `.storybook/public/mockServiceWorker.js` - Storybook用
 
 **生成されるファイル**:
+
 ```
 public/
 └── mockServiceWorker.js         ← 生成される
@@ -68,6 +70,7 @@ cp .env.local.example .env.local
 ```
 
 デフォルトの設定:
+
 ```
 NEXT_PUBLIC_GRAPHQL_ENDPOINT=/api/graphql
 ```
@@ -112,6 +115,7 @@ npm run codegen
 ```
 
 生成されるファイル:
+
 ```
 src/graphql/generated/
 ├── graphql.ts
@@ -137,11 +141,13 @@ src/graphql/generated/
 **原因**: MSW Service Workerが初期化されていません。
 
 **解決方法**:
+
 ```bash
 npm run msw:init
 ```
 
 **確認**:
+
 ```bash
 ls -la public/mockServiceWorker.js
 ls -la .storybook/public/mockServiceWorker.js
@@ -154,6 +160,7 @@ ls -la .storybook/public/mockServiceWorker.js
 **原因**: 依存関係がインストールされていません。
 
 **解決方法**:
+
 ```bash
 # node_modulesを削除して再インストール
 rm -rf node_modules package-lock.json
@@ -165,6 +172,7 @@ npm install
 **原因**: MSW Service Workerの初期化またはurql Providerの問題。
 
 **解決方法**:
+
 1. `npm run msw:init` を実行
 2. ブラウザのキャッシュをクリア
 3. Storybookを再起動
@@ -189,12 +197,14 @@ parameters: {
 **原因**: MSW serverが正しく起動していない可能性があります。
 
 **確認**:
+
 ```bash
 # テストのセットアップファイルを確認
 cat src/test/setup.ts
 ```
 
 以下が含まれていることを確認：
+
 ```typescript
 import { server } from '../mocks/server';
 
@@ -237,6 +247,7 @@ npm test
 このプロジェクトはTailwind CSS 4を使用しています。主な変更点：
 
 ### PostCSS設定
+
 ```javascript
 // postcss.config.js
 export default {
@@ -247,21 +258,20 @@ export default {
 ```
 
 ### グローバルCSS
+
 ```css
 /* src/styles/globals.css */
-@import "tailwindcss"; /* 新しいインポート方法 */
+@import 'tailwindcss'; /* 新しいインポート方法 */
 ```
 
 ### Tailwind設定ファイル
+
 ```typescript
 // tailwind.config.js
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}'],
   // ...
 };
 ```

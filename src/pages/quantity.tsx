@@ -17,10 +17,7 @@ export default function QuantityPage() {
     <>
       <Header />
       <main>
-        <QuantitySelection
-          onComplete={handleComplete}
-          onCancel={handleCancel}
-        />
+        <QuantitySelection onComplete={handleComplete} onCancel={handleCancel} />
       </main>
     </>
   );

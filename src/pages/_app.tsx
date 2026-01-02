@@ -1,14 +1,15 @@
-import type { AppProps } from "next/app";
-import { Provider as UrqlProvider } from "urql";
-import { createUrqlClient } from "@/lib/urql";
-import "@/styles/globals.css";
+import type { AppProps } from 'next/app';
+import { Provider as UrqlProvider } from 'urql';
+import { createUrqlClient } from '@/lib/urql';
+import '@/styles/globals.css';
 
 const urqlClient = createUrqlClient();
 
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  const { worker } = require("../mocks/browser");
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { worker } = require('../mocks/browser');
   worker.start({
-    onUnhandledRequest: "bypass", // モックされていないリクエストは通す
+    onUnhandledRequest: 'bypass', // モックされていないリクエストは通す
   });
 }
 

@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Provider as UrqlProvider } from "urql";
-import { Header } from "./Header";
-import { useCart } from "../hooks/useCart";
-import { mockProducts } from "../data/products";
-import { useEffect } from "react";
-import { createUrqlClient } from "../lib/urql";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Provider as UrqlProvider } from 'urql';
+import { Header } from './Header';
+import { useCart } from '../hooks/useCart';
+import { mockProducts } from '../data/products';
+import { useEffect } from 'react';
+import { createUrqlClient } from '../lib/urql';
 
 const urqlClient = createUrqlClient();
 
 const meta = {
-  title: "Components/Header",
+  title: 'Components/Header',
   component: Header,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     nextjs: {
       appDirectory: false,
       navigation: {
-        pathname: "/",
+        pathname: '/',
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <UrqlProvider value={urqlClient}>

@@ -1,17 +1,17 @@
 // src/hooks/useAuth.test.ts
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { renderHook, act, waitFor } from "@testing-library/react";
-import { useAuth } from "./useAuth";
-import { AllTheProviders } from "@/test/test-utils";
-import { LoginResult } from "@/types/auth";
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { renderHook, act, waitFor } from '@testing-library/react';
+import { useAuth } from './useAuth';
+import { AllTheProviders } from '@/test/test-utils';
+import { LoginResult } from '@/types/auth';
 
-describe("useAuth", () => {
+describe('useAuth', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
   });
 
-  it("初期状態では未認証", () => {
+  it('初期状態では未認証', () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
@@ -21,27 +21,27 @@ describe("useAuth", () => {
     expect(result.current.token).toBeNull();
   });
 
-  it("ログインに成功すると認証状態になる", async () => {
+  it('ログインに成功すると認証状態になる', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
 
     await act(async () => {
       await result.current.login({
-        email: "demo@example.com",
-        password: "password123",
+        email: 'demo@example.com',
+        password: 'password123',
       });
     });
 
     await waitFor(() => {
       expect(result.current.isAuthenticated).toBe(true);
       expect(result.current.user).not.toBeNull();
-      expect(result.current.user?.email).toBe("demo@example.com");
+      expect(result.current.user?.email).toBe('demo@example.com');
       expect(result.current.token).not.toBeNull();
     });
   });
 
-  it("ログアウトすると未認証状態になる", async () => {
+  it('ログアウトすると未認証状態になる', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
@@ -49,8 +49,8 @@ describe("useAuth", () => {
     // ログイン
     await act(async () => {
       await result.current.login({
-        email: "demo@example.com",
-        password: "password123",
+        email: 'demo@example.com',
+        password: 'password123',
       });
     });
 
@@ -68,7 +68,7 @@ describe("useAuth", () => {
     expect(result.current.token).toBeUndefined();
   });
 
-  it("誤った認証情報ではログインできない", async () => {
+  it('誤った認証情報ではログインできない', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
@@ -76,8 +76,8 @@ describe("useAuth", () => {
     let loginResult: LoginResult | undefined;
     await act(async () => {
       loginResult = await result.current.login({
-        email: "wrong@example.com",
-        password: "wrongpassword",
+        email: 'wrong@example.com',
+        password: 'wrongpassword',
       });
     });
 
@@ -88,32 +88,32 @@ describe("useAuth", () => {
     expect(result.current.isAuthenticated).toBe(false);
   });
 
-  it("認証状態がlocalStorageに永続化される", async () => {
+  it('認証状態がlocalStorageに永続化される', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
 
     await act(async () => {
       await result.current.login({
-        email: "demo@example.com",
-        password: "password123",
+        email: 'demo@example.com',
+        password: 'password123',
       });
     });
 
     await waitFor(() => {
-      const authState = localStorage.getItem("auth-state");
+      const authState = localStorage.getItem('auth-state');
       expect(authState).not.toBeNull();
 
       if (authState) {
         const parsed = JSON.parse(authState);
         expect(parsed.isAuthenticated).toBe(true);
-        expect(parsed.user.email).toBe("demo@example.com");
+        expect(parsed.user.email).toBe('demo@example.com');
         expect(parsed.token).toBeTruthy();
       }
     });
   });
 
-  it("ログアウト後はlocalStorageがクリアされる", async () => {
+  it('ログアウト後はlocalStorageがクリアされる', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
@@ -121,8 +121,8 @@ describe("useAuth", () => {
     // ログイン
     await act(async () => {
       await result.current.login({
-        email: "demo@example.com",
-        password: "password123",
+        email: 'demo@example.com',
+        password: 'password123',
       });
     });
 
@@ -135,11 +135,11 @@ describe("useAuth", () => {
       result.current.logout();
     });
 
-    const authState = localStorage.getItem("auth-state");
+    const authState = localStorage.getItem('auth-state');
     expect(authState).toBeNull();
   });
 
-  it("ログイン中はisLoadingがtrueになる", async () => {
+  it('ログイン中はisLoadingがtrueになる', async () => {
     const { result } = renderHook(() => useAuth(), {
       wrapper: AllTheProviders,
     });
@@ -149,8 +149,8 @@ describe("useAuth", () => {
     // ログイン開始（awaitしない）
     const loginPromise = act(async () => {
       return result.current.login({
-        email: "demo@example.com",
-        password: "password123",
+        email: 'demo@example.com',
+        password: 'password123',
       });
     });
 
@@ -165,13 +165,13 @@ describe("useAuth", () => {
     });
   });
 
-  it("localStorageに既存の認証情報がある場合、初期状態で認証済みになる", () => {
+  it('localStorageに既存の認証情報がある場合、初期状態で認証済みになる', () => {
     // 事前にlocalStorageにデータをセット
     localStorage.setItem(
-      "auth-state",
+      'auth-state',
       JSON.stringify({
-        user: { id: "1", email: "test@example.com", name: "Test User" },
-        token: "existing-token",
+        user: { id: '1', email: 'test@example.com', name: 'Test User' },
+        token: 'existing-token',
         isAuthenticated: true,
       })
     );
@@ -181,7 +181,7 @@ describe("useAuth", () => {
     });
 
     expect(result.current.isAuthenticated).toBe(true);
-    expect(result.current.user?.email).toBe("test@example.com");
-    expect(result.current.token).toBe("existing-token");
+    expect(result.current.user?.email).toBe('test@example.com');
+    expect(result.current.token).toBe('existing-token');
   });
 });

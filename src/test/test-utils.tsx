@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
-import { Provider as UrqlProvider } from "urql";
-import { createUrqlClient } from "@/lib/urql";
+import React, { ReactElement } from 'react';
+import { render, RenderOptions } from '@testing-library/react';
+import { Provider as UrqlProvider } from 'urql';
+import { createUrqlClient } from '@/lib/urql';
 
 const urqlClient = createUrqlClient();
 
@@ -13,10 +13,8 @@ const AllTheProviders = ({ children }: AllTheProvidersProps) => {
   return <UrqlProvider value={urqlClient}>{children}</UrqlProvider>;
 };
 
-const customRender = (
-  ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
-) => render(ui, { wrapper: AllTheProviders, ...options });
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
 
-export * from "@testing-library/react";
+export * from '@testing-library/react';
 export { customRender as render, AllTheProviders };

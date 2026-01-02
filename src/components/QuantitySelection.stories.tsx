@@ -1,27 +1,27 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Provider as UrqlProvider } from "urql";
-import { QuantitySelection } from "./QuantitySelection";
-import { mockProducts } from "../data/products";
-import { useEffect } from "react";
-import { useSelectedProduct } from "../hooks/useSelectedProduct";
-import { useCart } from "../hooks/useCart";
-import { createUrqlClient } from "../lib/urql";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Provider as UrqlProvider } from 'urql';
+import { QuantitySelection } from './QuantitySelection';
+import { mockProducts } from '../data/products';
+import { useEffect } from 'react';
+import { useSelectedProduct } from '../hooks/useSelectedProduct';
+import { useCart } from '../hooks/useCart';
+import { createUrqlClient } from '../lib/urql';
 
 const urqlClient = createUrqlClient();
 
 const meta = {
-  title: "Components/QuantitySelection",
+  title: 'Components/QuantitySelection',
   component: QuantitySelection,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     nextjs: {
       appDirectory: false,
       navigation: {
-        pathname: "/quantity",
+        pathname: '/quantity',
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <UrqlProvider value={urqlClient}>
@@ -33,7 +33,7 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-type StoryWithoutArgs = Omit<Story, "args">;
+type StoryWithoutArgs = Omit<Story, 'args'>;
 
 // ストーリー用のラッパーコンポーネント
 const QuantitySelectionWrapper = ({
@@ -58,8 +58,8 @@ const QuantitySelectionWrapper = ({
 
   return (
     <QuantitySelection
-      onComplete={() => alert("カートに追加されました")}
-      onCancel={() => alert("キャンセルされました")}
+      onComplete={() => alert('カートに追加されました')}
+      onCancel={() => alert('キャンセルされました')}
     />
   );
 };
@@ -73,7 +73,7 @@ export const WithExistingCartItem: StoryWithoutArgs = {
   parameters: {
     docs: {
       description: {
-        story: "既にカートに3個入っている状態で、同じ商品をさらに追加する場合",
+        story: '既にカートに3個入っている状態で、同じ商品をさらに追加する場合',
       },
     },
   },
@@ -84,7 +84,7 @@ export const WithLargeCartQuantity: StoryWithoutArgs = {
   parameters: {
     docs: {
       description: {
-        story: "既にカートに8個入っている状態",
+        story: '既にカートに8個入っている状態',
       },
     },
   },
@@ -111,8 +111,8 @@ export const LowStockProduct: StoryWithoutArgs = {
 
     return (
       <QuantitySelection
-        onComplete={() => alert("カートに追加されました")}
-        onCancel={() => alert("キャンセルされました")}
+        onComplete={() => alert('カートに追加されました')}
+        onCancel={() => alert('キャンセルされました')}
       />
     );
   },
@@ -120,7 +120,7 @@ export const LowStockProduct: StoryWithoutArgs = {
 
 export const NoProductSelected: Story = {
   args: {
-    onComplete: () => alert("完了"),
-    onCancel: () => alert("キャンセル"),
+    onComplete: () => alert('完了'),
+    onCancel: () => alert('キャンセル'),
   },
 };

@@ -40,7 +40,7 @@ describe('useCart', () => {
 
   it('商品をカートに追加できるべき', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart(mockProduct, 2);
     });
@@ -61,18 +61,18 @@ import { Cart } from './Cart';
 describe('Cart', () => {
   it('空のカートでは空メッセージが表示される', () => {
     render(<Cart onContinueShopping={() => {}} />);
-    
+
     expect(screen.getByText('カートが空です')).toBeInTheDocument();
   });
 
   it('ボタンをクリックするとコールバックが呼ばれる', async () => {
     const user = userEvent.setup();
     const mockCallback = vi.fn();
-    
+
     render(<Cart onContinueShopping={mockCallback} />);
-    
+
     await user.click(screen.getByText('買い物を続ける'));
-    
+
     expect(mockCallback).toHaveBeenCalled();
   });
 });
@@ -292,6 +292,7 @@ function MyComponent() {
 ### Server ComponentsとClient Components
 
 #### Server Components（デフォルト）
+
 - サーバーサイドでレンダリング
 - バンドルサイズが小さい
 - データフェッチが高速
@@ -305,6 +306,7 @@ export default function Home() {
 ```
 
 #### Client Components
+
 - クライアントサイドでレンダリング
 - インタラクティブ（useState、useEffectなど使用可）
 - `'use client'`ディレクティブが**必要**
@@ -325,8 +327,8 @@ export function MyComponent() {
 `tsconfig.json`で`@/`エイリアスを設定：
 
 ```typescript
-import { useCart } from '@/hooks/useCart'
-import { Product } from '@/types'
+import { useCart } from '@/hooks/useCart';
+import { Product } from '@/types';
 ```
 
 ---
@@ -415,18 +417,21 @@ jobs:
 ## 🎯 まとめ
 
 ### Vitestの利点
+
 - ✅ 高速なテスト実行
 - ✅ Viteとの統合
 - ✅ Hot Module Replacement対応
 - ✅ UIモードで視覚的にテスト確認
 
 ### Storybookの利点
+
 - ✅ コンポーネントの独立した開発
 - ✅ 視覚的なドキュメント
 - ✅ さまざまな状態の確認が容易
 - ✅ デザイナーとの協業が容易
 
 ### Next.js App Routerの利点
+
 - ✅ ファイルベースの直感的なルーティング
 - ✅ Server ComponentsとClient Componentsの使い分け
 - ✅ 組み込みの最適化機能
