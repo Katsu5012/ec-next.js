@@ -3,7 +3,7 @@ import { mockProducts } from '../data/products';
 
 export const handlers = [
   // 商品一覧取得
-  graphql.query('GetProducts', () => {
+  graphql.query('ProductsQuery', () => {
     return HttpResponse.json({
       data: {
         products: mockProducts,

@@ -2,17 +2,21 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   schema: './graphql/schema.graphql',
-  documents: ['src/graphql/**/*.ts'],
+  documents: ['src/**/*.{ts,tsx}', '!src/generated/**'],
+  ignoreNoDocuments: true,
   generates: {
-    './src/graphql/generated/': {
+    'src/gql/': {
       preset: 'client',
       plugins: [],
       presetConfig: {
-        gqlTagName: 'gql',
+        // ✅ Fragment Maskingを有効化
+        fragmentMasking: { unmaskFunctionName: 'readFragment' },
+      },
+      config: {
+        useTypeImports: true,
       },
     },
   },
-  ignoreNoDocuments: true,
 };
 
 export default config;

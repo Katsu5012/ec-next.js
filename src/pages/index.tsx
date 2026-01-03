@@ -1,11 +1,20 @@
 import { useQuery } from 'urql';
 import { Header } from '@/components/Header';
-import { ProductList } from '@/components/ProductList';
-import { GET_PRODUCTS } from '@/graphql/queries';
+import { ProductCard } from '@/components/ProductCard';
 import { AuthGuard } from '@/components/AuthGuard';
+import { graphql } from '@/gql';
+
+export const ProductsQuery = graphql(`
+  query ProductsQuery {
+    products {
+      id
+      ...ProductCardFragment
+    }
+  }
+`);
 
 export default function Home() {
-  const [result] = useQuery({ query: GET_PRODUCTS });
+  const [result] = useQuery({ query: ProductsQuery });
 
   const { data, fetching, error } = result;
 
@@ -27,7 +36,17 @@ export default function Home() {
             </div>
           )}
 
-          {data?.products && <ProductList products={data.products} />}
+          {data?.products && (
+            <div className="max-w-7xl mx-auto px-4 py-8">
+              <h1 className="text-3xl font-bold mb-8 text-gray-900">商品一覧</h1>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {data.products.map((p) => {
+                  return <ProductCard data={p} key={p.id} />;
+                })}
+              </div>
+            </div>
+          )}
         </main>
       </AuthGuard>
     </>

@@ -9,6 +9,7 @@ export const Header: React.FC = () => {
   const totalItems = getTotalItems();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
   const { user, logout } = useAuth();
 

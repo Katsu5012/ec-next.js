@@ -12,10 +12,13 @@ export const createUrqlClient = () => {
     url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || '/api/graphql',
     exchanges: [cacheExchange, ssr, fetchExchange],
     // フェッチオプション
-    fetchOptions: {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    fetchOptions: () => {
+      return {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
     },
   });
 };
