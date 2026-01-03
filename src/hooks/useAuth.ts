@@ -1,9 +1,23 @@
 // src/hooks/useAuth.ts
 import { useCallback } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import type { LoginInput, AuthState, LoginResult } from '../types/auth';
+import type { AuthState, LoginResult } from '../types/auth';
 import { useMutation } from 'urql';
-import { LOGIN } from '../graphql/mutations';
+import { graphql } from '@/gql';
+import { LoginInput } from '@/gql/graphql';
+
+export const LOGIN = graphql(`
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      token
+      user {
+        id
+        email
+        name
+      }
+    }
+  }
+`);
 
 export function useAuth() {
   const [authState, setAuthState] = useLocalStorage<AuthState | null>('auth-state', {
