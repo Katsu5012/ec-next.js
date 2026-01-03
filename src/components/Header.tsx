@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCart } from '../hooks/useCart';
@@ -8,6 +8,8 @@ export const Header: React.FC = () => {
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -97,7 +99,7 @@ export const Header: React.FC = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              {totalItems > 0 && user && (
+              {mounted && totalItems > 0 && user && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {totalItems > 99 ? '99+' : totalItems}
                 </span>
@@ -105,7 +107,7 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* ユーザー情報 */}
-            {user && (
+            {mounted && user && (
               <div className="flex items-center space-x-4">
                 <span className="text-sm">{user.name}</span>
                 <button
