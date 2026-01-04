@@ -15,15 +15,25 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
     "\n  fragment ProductCardFragment on Product {\n    id\n    name\n    price\n    imageUrl\n    description\n    stock\n  }\n": typeof types.ProductCardFragmentFragmentDoc,
+    "\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n": typeof types.ProductDetailFragmentFragmentDoc,
+    "\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n": typeof types.GetProductReviewsQueryDocument,
+    "\n  fragment ProductReviewFragment on Review {\n    id\n    userId\n    userName\n    rating\n    comment\n    createdAt\n  }\n": typeof types.ProductReviewFragmentFragmentDoc,
+    "\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n": typeof types.ProductReviewsFragmentFragmentDoc,
     "\n  mutation AddToCart($input: AddToCartInput!) {\n    addToCart(input: $input) {\n      success\n      message\n      cartItem {\n        product {\n          id\n          name\n          price\n          imageUrl\n          stock\n          description\n        }\n        quantity\n        addedAt\n      }\n    }\n  }\n": typeof types.AddToCartDocument,
     "\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      token\n      user {\n        id\n        email\n        name\n      }\n    }\n  }\n": typeof types.LoginDocument,
     "\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n": typeof types.ProductsQueryDocument,
+    "\n  query GetProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      name\n      ...ProductDetailFragment\n    }\n  }\n": typeof types.GetProductQueryDocument,
 };
 const documents: Documents = {
     "\n  fragment ProductCardFragment on Product {\n    id\n    name\n    price\n    imageUrl\n    description\n    stock\n  }\n": types.ProductCardFragmentFragmentDoc,
+    "\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n": types.ProductDetailFragmentFragmentDoc,
+    "\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n": types.GetProductReviewsQueryDocument,
+    "\n  fragment ProductReviewFragment on Review {\n    id\n    userId\n    userName\n    rating\n    comment\n    createdAt\n  }\n": types.ProductReviewFragmentFragmentDoc,
+    "\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n": types.ProductReviewsFragmentFragmentDoc,
     "\n  mutation AddToCart($input: AddToCartInput!) {\n    addToCart(input: $input) {\n      success\n      message\n      cartItem {\n        product {\n          id\n          name\n          price\n          imageUrl\n          stock\n          description\n        }\n        quantity\n        addedAt\n      }\n    }\n  }\n": types.AddToCartDocument,
     "\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      token\n      user {\n        id\n        email\n        name\n      }\n    }\n  }\n": types.LoginDocument,
     "\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n": types.ProductsQueryDocument,
+    "\n  query GetProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      name\n      ...ProductDetailFragment\n    }\n  }\n": types.GetProductQueryDocument,
 };
 
 /**
@@ -47,6 +57,22 @@ export function graphql(source: "\n  fragment ProductCardFragment on Product {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n"): (typeof documents)["\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n"): (typeof documents)["\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ProductReviewFragment on Review {\n    id\n    userId\n    userName\n    rating\n    comment\n    createdAt\n  }\n"): (typeof documents)["\n  fragment ProductReviewFragment on Review {\n    id\n    userId\n    userName\n    rating\n    comment\n    createdAt\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n"): (typeof documents)["\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation AddToCart($input: AddToCartInput!) {\n    addToCart(input: $input) {\n      success\n      message\n      cartItem {\n        product {\n          id\n          name\n          price\n          imageUrl\n          stock\n          description\n        }\n        quantity\n        addedAt\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation AddToCart($input: AddToCartInput!) {\n    addToCart(input: $input) {\n      success\n      message\n      cartItem {\n        product {\n          id\n          name\n          price\n          imageUrl\n          stock\n          description\n        }\n        quantity\n        addedAt\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -56,6 +82,10 @@ export function graphql(source: "\n  mutation Login($input: LoginInput!) {\n    
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n"): (typeof documents)["\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      name\n      ...ProductDetailFragment\n    }\n  }\n"): (typeof documents)["\n  query GetProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      name\n      ...ProductDetailFragment\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

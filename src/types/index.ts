@@ -26,3 +26,19 @@ export interface SelectedProduct {
   product: Product;
   quantity: number;
 }
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  rating: number; // 1-5
+  comment: string;
+  createdAt: string;
+}
+
+export interface ProductReviews {
+  productId: string;
+  reviews: Review[];
+  averageRating: number;
+  totalCount: number;
+}

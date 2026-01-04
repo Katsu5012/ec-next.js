@@ -7,6 +7,22 @@ type Product {
   description: String
 }
 
+type Review {
+  id: ID!
+  userId: ID!
+  userName: String!
+  rating: Int!
+  comment: String!
+  createdAt: String!
+}
+
+type ProductReviews {
+  productId: ID!
+  averageRating: Float!
+  totalCount: Int!
+  reviews: [Review!]!
+}
+
 type CartItem {
   product: Product!
   quantity: Int!
@@ -27,6 +43,7 @@ type AddToCartPayload {
 type Query {
   products: [Product!]!
   product(id: ID!): Product
+  productReviews(productId: ID!): ProductReviews!
 }
 
 type Mutation {

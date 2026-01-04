@@ -1,5 +1,6 @@
 import { delay, graphql, HttpResponse } from 'msw';
 import { mockProducts } from '../data/products';
+import { mockReviews } from '@/data/reviews';
 
 export const handlers = [
   // 商品一覧取得
@@ -12,7 +13,7 @@ export const handlers = [
   }),
 
   // 商品詳細取得
-  graphql.query('GetProduct', ({ variables }) => {
+  graphql.query('GetProductQuery', ({ variables }) => {
     const product = mockProducts.find((p) => p.id === variables.id);
 
     if (!product) {
@@ -28,6 +29,27 @@ export const handlers = [
     return HttpResponse.json({
       data: {
         product,
+      },
+    });
+  }),
+
+  // 商品レビュー取得
+  graphql.query('GetProductReviewsQuery', ({ variables }) => {
+    const reviews = mockReviews[String(variables.productId)];
+
+    if (!reviews) {
+      return HttpResponse.json({
+        errors: [
+          {
+            message: 'Product not found',
+          },
+        ],
+      });
+    }
+
+    return HttpResponse.json({
+      data: {
+        productReviews: reviews,
       },
     });
   }),
