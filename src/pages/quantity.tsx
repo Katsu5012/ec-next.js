@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { Header } from '@/components/Header';
-import { QuantitySelection } from '@/components/QuantitySelection';
+import { Header } from '@/components/Header/Header';
+import { QuantitySelection } from '@/components/QuantitySelection/QuantitySelection';
 
 export default function QuantityPage() {
   const router = useRouter();

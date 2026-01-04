@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { Header } from '@/components/Header';
-import { Cart } from '@/components/Cart';
+import { Header } from '@/components/Header/Header';
+import { Cart } from '@/components/Cart/Cart';
 import { AuthGuard } from '@/components/AuthGuard';
 
 export default function CartPage() {

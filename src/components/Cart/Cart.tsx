@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '@/hooks/useCart';
 
 interface CartProps {
   onContinueShopping: () => void;

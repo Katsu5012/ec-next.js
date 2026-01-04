@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelectedProduct } from '../hooks/useSelectedProduct';
-import { useCart } from '../hooks/useCart';
+import { useSelectedProduct } from '@/hooks/useSelectedProduct';
+import { useCart } from '@/hooks/useCart';
 
 interface QuantitySelectionProps {
   onComplete: () => void;

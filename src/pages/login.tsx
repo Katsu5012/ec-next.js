@@ -1,6 +1,6 @@
 // pages/login.tsx
 import { useRouter } from 'next/router';
-import { Login } from '../components/Login';
+import { Login } from '@/components/Login/Login';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect } from 'react';
 

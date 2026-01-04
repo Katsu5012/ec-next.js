@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Provider as UrqlProvider } from 'urql';
 import { Header } from './Header';
-import { useCart } from '../hooks/useCart';
-import { mockProducts } from '../data/products';
+import { useCart } from '@/hooks/useCart';
+import { mockProducts } from '@/data/products';
 import { useEffect } from 'react';
-import { createUrqlClient } from '../lib/urql';
+import { createUrqlClient } from '@/lib/urql';
 
 const urqlClient = createUrqlClient();
 

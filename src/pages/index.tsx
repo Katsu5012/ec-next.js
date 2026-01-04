@@ -1,6 +1,6 @@
 import { useQuery } from 'urql';
-import { Header } from '@/components/Header';
-import { ProductCard } from '@/components/ProductCard';
+import { Header } from '@/components/Header/Header';
+import { ProductCard } from '@/components/ProductCard/ProductCard';
 import { AuthGuard } from '@/components/AuthGuard';
 import { graphql } from '@/gql';
 

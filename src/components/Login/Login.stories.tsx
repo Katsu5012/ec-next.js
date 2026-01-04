@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Login } from './Login';
 import { within, userEvent, expect } from '@storybook/test';
 import { Provider as UrqlProvider } from 'urql';
-import { createUrqlClient } from '../lib/urql';
+import { createUrqlClient } from '@/lib/urql';
 
 const urqlClient = createUrqlClient();
 

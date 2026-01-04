@@ -4,7 +4,7 @@ import { useQuery } from 'urql';
 import Link from 'next/link';
 import { AuthGuard } from '@/components/AuthGuard';
 import { ProductDetailTabs } from '@/components/ProductDetailTabs';
-import { Header } from '@/components/Header';
+import { Header } from '@/components/Header/Header';
 import { graphql } from '@/gql';
 
 export const GetProductQuery = graphql(`

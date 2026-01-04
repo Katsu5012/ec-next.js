@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
-import { useCart } from '../hooks/useCart';
-import { useSelectedProduct } from '../hooks/useSelectedProduct';
+import { useCart } from '../../hooks/useCart';
+import { useSelectedProduct } from '../../hooks/useSelectedProduct';
 import { FragmentType, graphql, readFragment } from '@/gql';
 import Link from 'next/link';
 
