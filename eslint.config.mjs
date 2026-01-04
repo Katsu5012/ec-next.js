@@ -24,6 +24,7 @@ const eslintConfig = defineConfig(
     'next-env.d.ts',
     'src/graphql/generated/**',
     'coverage/**',
+    'src/gql/**',
   ]),
   {
     name: 'Plugins',
