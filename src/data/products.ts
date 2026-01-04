@@ -1,7 +1,7 @@
 import { Product } from '../types';
 
 /**
- * サンプル商品データ
+ *  サンプル商品データ
  */
 export const mockProducts: Product[] = [
   {
