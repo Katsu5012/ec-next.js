@@ -50,6 +50,19 @@ export type CreateOrderPayload = {
   success: Scalars['Boolean']['output'];
 };
 
+export type CreateReviewInput = {
+  comment: Scalars['String']['input'];
+  productId: Scalars['ID']['input'];
+  rating: Scalars['Int']['input'];
+};
+
+export type CreateReviewPayload = {
+  __typename?: 'CreateReviewPayload';
+  message?: Maybe<Scalars['String']['output']>;
+  review?: Maybe<Review>;
+  success: Scalars['Boolean']['output'];
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -65,6 +78,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addToCart: AddToCartPayload;
   createOrder: CreateOrderPayload;
+  createReview: CreateReviewPayload;
   login: LoginResponse;
 };
 
@@ -74,6 +88,10 @@ export type MutationAddToCartArgs = {
 
 export type MutationCreateOrderArgs = {
   input: CreateOrderInput;
+};
+
+export type MutationCreateReviewArgs = {
+  input: CreateReviewInput;
 };
 
 export type MutationLoginArgs = {
@@ -250,6 +268,28 @@ export type ProductReviewsFragmentFragment = {
     }
   >;
 } & { ' $fragmentName'?: 'ProductReviewsFragmentFragment' };
+
+export type CreateReviewMutationVariables = Exact<{
+  input: CreateReviewInput;
+}>;
+
+export type CreateReviewMutation = {
+  __typename?: 'Mutation';
+  createReview: {
+    __typename?: 'CreateReviewPayload';
+    success: boolean;
+    message?: string | null;
+    review?: {
+      __typename?: 'Review';
+      id: string;
+      userId: string;
+      userName: string;
+      rating: number;
+      comment: string;
+      createdAt: string;
+    } | null;
+  };
+};
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -574,6 +614,64 @@ export const GetProductReviewsQueryDocument = {
     },
   ],
 } as unknown as DocumentNode<GetProductReviewsQueryQuery, GetProductReviewsQueryQueryVariables>;
+export const CreateReviewDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateReview' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'CreateReviewInput' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createReview' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'review' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'userId' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'userName' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'rating' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateReviewMutation, CreateReviewMutationVariables>;
 export const LoginDocument = {
   kind: 'Document',
   definitions: [

@@ -88,10 +88,23 @@ type CreateOrderPayload {
   message: String
 }
 
+input CreateReviewInput {
+  productId: ID!
+  rating: Int!
+  comment: String!
+}
+
+type CreateReviewPayload {
+  success: Boolean!
+  review: Review
+  message: String
+}
+
 type Mutation {
   addToCart(input: AddToCartInput!): AddToCartPayload!
   login(input: LoginInput!): LoginResponse!
   createOrder(input: CreateOrderInput!): CreateOrderPayload!
+  createReview(input: CreateReviewInput!): CreateReviewPayload!
 }
 
 input LoginInput {
