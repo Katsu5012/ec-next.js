@@ -7,7 +7,8 @@ permissions:
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
+  workflow_dispatch:
 
 jobs:
   review:
