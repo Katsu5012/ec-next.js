@@ -38,6 +38,7 @@ type StoryWithoutArgs = Omit<Story, 'args'>;
 export const EmptyCart: Story = {
   args: {
     onContinueShopping: () => alert('買い物を続ける'),
+    onCheckout: () => alert('購入手続きへ'),
   },
 };
 
@@ -52,7 +53,12 @@ const CartWithItemsWrapper = ({ itemCount = 2 }: { itemCount?: number }) => {
     }
   }, [itemCount]);
 
-  return <Cart onContinueShopping={() => alert('買い物を続ける')} />;
+  return (
+    <Cart
+      onContinueShopping={() => alert('買い物を続ける')}
+      onCheckout={() => alert('購入手続きへ')}
+    />
+  );
 };
 
 export const WithItems: StoryWithoutArgs = {
@@ -78,6 +84,11 @@ export const FullCart: StoryWithoutArgs = {
       });
     }, []);
 
-    return <Cart onContinueShopping={() => alert('買い物を続ける')} />;
+    return (
+      <Cart
+        onContinueShopping={() => alert('買い物を続ける')}
+        onCheckout={() => alert('購入手続きへ')}
+      />
+    );
   },
 };

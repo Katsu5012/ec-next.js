@@ -39,6 +39,17 @@ export type CartItem = {
   quantity: Scalars['Int']['output'];
 };
 
+export type CreateOrderInput = {
+  shippingAddress: ShippingAddressInput;
+};
+
+export type CreateOrderPayload = {
+  __typename?: 'CreateOrderPayload';
+  message?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Order>;
+  success: Scalars['Boolean']['output'];
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -53,6 +64,7 @@ export type LoginResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   addToCart: AddToCartPayload;
+  createOrder: CreateOrderPayload;
   login: LoginResponse;
 };
 
@@ -60,8 +72,28 @@ export type MutationAddToCartArgs = {
   input: AddToCartInput;
 };
 
+export type MutationCreateOrderArgs = {
+  input: CreateOrderInput;
+};
+
 export type MutationLoginArgs = {
   input: LoginInput;
+};
+
+export type Order = {
+  __typename?: 'Order';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  items: Array<OrderItem>;
+  totalPrice: Scalars['Int']['output'];
+};
+
+export type OrderItem = {
+  __typename?: 'OrderItem';
+  price: Scalars['Int']['output'];
+  productId: Scalars['ID']['output'];
+  productName: Scalars['String']['output'];
+  quantity: Scalars['Int']['output'];
 };
 
 export type Product = {
@@ -107,11 +139,33 @@ export type Review = {
   userName: Scalars['String']['output'];
 };
 
+export type ShippingAddressInput = {
+  address: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  phone: Scalars['String']['input'];
+  postalCode: Scalars['String']['input'];
+  prefecture: Scalars['String']['input'];
+};
+
 export type User = {
   __typename?: 'User';
   email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+export type CreateOrderMutationVariables = Exact<{
+  input: CreateOrderInput;
+}>;
+
+export type CreateOrderMutation = {
+  __typename?: 'Mutation';
+  createOrder: {
+    __typename?: 'CreateOrderPayload';
+    success: boolean;
+    message?: string | null;
+    order?: { __typename?: 'Order'; id: string; totalPrice: number; createdAt: string } | null;
+  };
 };
 
 export type ProductCardFragmentFragment = {
@@ -312,6 +366,61 @@ export const ProductReviewsFragmentFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ProductReviewsFragmentFragment, unknown>;
+export const CreateOrderDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateOrder' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'CreateOrderInput' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createOrder' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'order' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'totalPrice' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateOrderMutation, CreateOrderMutationVariables>;
 export const GetProductReviewsQueryDocument = {
   kind: 'Document',
   definitions: [

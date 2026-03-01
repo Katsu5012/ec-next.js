@@ -4,7 +4,11 @@
       "Bash(pnpm check:*)",
       "Bash(pnpm test:*)",
       "Bash(pnpm build:*)",
-      "Bash(pnpm typecheck:*)"
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm codegen)",
+      "Bash(pnpm tsc --noEmit)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm format)"
     ],
     "deny": [
       "Bash(rm*)",

@@ -10,12 +10,16 @@ export default function CartPage() {
     router.push('/');
   };
 
+  const handleCheckout = () => {
+    router.push('/checkout');
+  };
+
   return (
     <>
       <Header />
       <main>
         <AuthGuard>
-          <Cart onContinueShopping={handleContinueShopping} />
+          <Cart onContinueShopping={handleContinueShopping} onCheckout={handleCheckout} />
         </AuthGuard>
       </main>
     </>

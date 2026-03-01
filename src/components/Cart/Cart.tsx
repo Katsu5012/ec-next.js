@@ -31,9 +31,10 @@ const DELETE_ICON = (
 
 interface CartProps {
   onContinueShopping: () => void;
+  onCheckout: () => void;
 }
 
-export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
+export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) => {
   const {
     cartItems,
     removeFromCart,
@@ -157,7 +158,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping }) => {
         </button>
         <button
           className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          onClick={() => alert('購入処理は未実装です')}
+          onClick={onCheckout}
         >
           購入手続きへ
         </button>

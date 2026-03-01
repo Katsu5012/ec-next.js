@@ -157,17 +157,133 @@ graphql.query('GetProducts', () => {
 
 ### テスト
 
-- すべてのコンポーネント・Hooksにテストを書く
-- urql Providerでラップする（`test-utils.tsx` のヘルパーを使用）
-- MSWは `src/test/setup.ts` で自動セットアップ済み
-- localStorageは各テスト前後に自動クリア
+**必須ルール**: コンポーネント `ComponentName.tsx` を新規作成する際は、**必ず同じディレクトリに `ComponentName.test.tsx` を作成すること。**
+
+#### テストファイルのテンプレート
+
+```typescript
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { cleanup, render, screen } from '@/test/test-utils';
+import { ComponentName } from './ComponentName';
+import userEvent from '@testing-library/user-event';
+
+describe('ComponentName', () => {
+  // コールバックPropsはvi.fn()でモック
+  const mockOnSomeAction = vi.fn();
+
+  beforeEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+    localStorage.clear(); // localStorageを使うコンポーネントの場合
+  });
+
+  afterEach(() => {
+    cleanup();
+    localStorage.clear();
+  });
+
+  // 必須テストケース:
+  // 1. 初期状態（空/デフォルト状態）のレンダリング
+  it('初期状態が正しく表示される', () => {
+    render(<ComponentName onSomeAction={mockOnSomeAction} />);
+    expect(screen.getByText('...')).toBeInTheDocument();
+  });
+
+  // 2. データがある状態のレンダリング
+  it('データがある場合に正しく表示される', () => {
+    // localStorageやpropsでデータをセット
+    render(<ComponentName onSomeAction={mockOnSomeAction} />);
+    expect(screen.getByRole('heading', { name: '...', level: 1 })).toBeInTheDocument();
+  });
+
+  // 3. ユーザーインタラクション（ボタンクリック等）
+  it('ボタンをクリックするとコールバックが呼ばれる', async () => {
+    const user = userEvent.setup();
+    render(<ComponentName onSomeAction={mockOnSomeAction} />);
+    await user.click(screen.getByRole('button', { name: '...' }));
+    expect(mockOnSomeAction).toHaveBeenCalledTimes(1);
+  });
+
+  // 4. エラー・境界状態
+  it('エラー状態が正しく表示される', () => { ... });
+});
+```
+
+#### テスト作成の規則
+
+- `render` は必ず `@/test/test-utils` からインポート（urqlProvider込み）
+- `userEvent.setup()` を使いインタラクションをテスト（`fireEvent` は使わない）
+- `screen.getByRole` を優先（`getByText` より意味的に明確）
+- `localStorage.setItem('ec-cart-items', JSON.stringify(cartItems))` でカート状態をセットアップ
+- MSWは `src/test/setup.ts` で自動セットアップ済みのため追加設定不要
+- GraphQL APIをテストする場合はMSWが自動でインターセプトする
 
 ### Storybook
 
-- すべてのUIコンポーネントにストーリーを作成
-- MSWで各種状態（通常、エラー、ローディング）をモック
-- urql Providerでラップする
-- Next.jsのrouterモックは `.storybook/preview.ts` で設定済み
+**必須ルール**: コンポーネント `ComponentName.tsx` を新規作成する際は、**必ず同じディレクトリに `ComponentName.stories.tsx` を作成すること。**
+
+#### ストーリーファイルのテンプレート
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/react';
+import { Provider as UrqlProvider } from 'urql';
+import { ComponentName } from './ComponentName';
+import { createUrqlClient } from '../../lib/urql';
+
+const urqlClient = createUrqlClient();
+
+const meta = {
+  title: 'Components/ComponentName',
+  component: ComponentName,
+  parameters: {
+    layout: 'fullscreen', // または 'centered' / 'padded'
+    nextjs: {
+      appDirectory: false,
+      navigation: {
+        pathname: '/該当パス', // コンポーネントが使われるページのパス
+      },
+    },
+  },
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <UrqlProvider value={urqlClient}>
+        <Story />
+      </UrqlProvider>
+    ),
+  ],
+} satisfies Meta<typeof ComponentName>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// 必須ストーリー:
+// 1. デフォルト（基本状態）
+export const Default: Story = {
+  args: {
+    onSomeAction: () => alert('action'),
+  },
+};
+
+// 2. データあり状態
+export const WithData: Story = {
+  args: { ... },
+};
+
+// 3. 空/エラー状態（該当する場合）
+export const Empty: Story = {
+  args: { ... },
+};
+```
+
+#### ストーリー作成の規則
+
+- `satisfies Meta<typeof ComponentName>` を必ず使う（型安全）
+- `tags: ['autodocs']` を必ず含める（自動ドキュメント生成）
+- `UrqlProvider` でラップする（GraphQL非使用コンポーネントでも統一）
+- `nextjs.navigation.pathname` にコンポーネントが使われるページのパスを設定
+- カート状態が必要なストーリーは `useCart` フックを使うラッパーコンポーネントを作成（`CartWithItemsWrapper` パターン参照）
+- 最低3つのストーリー（デフォルト・データあり・空/エラー）を作成
 
 ### TypeScript
 

@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('Cart', () => {
   const mockOnContinueShopping = vi.fn();
+  const mockOnCheckout = vi.fn();
 
   beforeEach(() => {
     cleanup();
@@ -19,7 +20,7 @@ describe('Cart', () => {
   });
 
   it('空のカートの場合、メッセージが表示される', () => {
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // 実際の文言に合わせる
     expect(screen.getByText('カートが空です')).toBeInTheDocument();
@@ -35,7 +36,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // 各商品の情報を検証
     cartItems.forEach(({ product, quantity }) => {
@@ -63,7 +64,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     expect(
       screen.getByRole('heading', { name: 'ショッピングカート', level: 1 })
@@ -78,7 +79,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // 商品数
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -95,7 +96,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // aria-labelで削除ボタンを取得
     const deleteButton = screen.getByRole('button', { name: '削除' });
@@ -117,7 +118,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     const clearButton = screen.getByRole('button', {
       name: 'カートを空にする',
@@ -136,7 +137,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // 現在の数量を確認（複数の"2"があるので、数量調整エリアのものを特定）
     const quantityArea = screen.getByText('2').closest('div');
@@ -156,7 +157,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     // -ボタンをクリック
     const decrementButton = screen.getByRole('button', { name: '-' });
@@ -172,7 +173,7 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     const incrementButton = screen.getByRole('button', { name: '+' });
     expect(incrementButton).toBeDisabled();
@@ -180,7 +181,7 @@ describe('Cart', () => {
 
   it('「買い物を続ける」ボタンをクリックするとコールバックが呼ばれる', async () => {
     const user = userEvent.setup();
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     const continueButton = screen.getByRole('button', {
       name: '買い物を続ける',
@@ -195,13 +196,13 @@ describe('Cart', () => {
 
     localStorage.setItem('ec-cart-items', JSON.stringify(cartItems));
 
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     expect(screen.getByRole('button', { name: '購入手続きへ' })).toBeInTheDocument();
   });
 
   it('「購入手続きへ」ボタンは表示されない（空のカートの場合）', () => {
-    render(<Cart onContinueShopping={mockOnContinueShopping} />);
+    render(<Cart onContinueShopping={mockOnContinueShopping} onCheckout={mockOnCheckout} />);
 
     expect(screen.queryByRole('button', { name: '購入手続きへ' })).not.toBeInTheDocument();
   });

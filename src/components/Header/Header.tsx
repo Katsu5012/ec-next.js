@@ -42,11 +42,13 @@ export const Header: React.FC = () => {
 
   // 現在のパスからページを判定
   const currentPage =
-    router.pathname === '/cart'
-      ? 'cart'
-      : router.pathname === '/quantity'
-        ? 'quantity'
-        : 'products';
+    router.pathname === '/checkout' || router.pathname === '/order-complete'
+      ? 'checkout'
+      : router.pathname === '/cart'
+        ? 'cart'
+        : router.pathname === '/quantity'
+          ? 'quantity'
+          : 'products';
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -88,6 +90,16 @@ export const Header: React.FC = () => {
                 }`}
               >
                 カート
+              </span>
+              <span className="text-gray-400">→</span>
+              <span
+                className={`px-3 py-1 rounded-full ${
+                  currentPage === 'checkout'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
+                }`}
+              >
+                購入手続き
               </span>
             </div>
 

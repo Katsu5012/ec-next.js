@@ -102,6 +102,25 @@ export const handlers = [
     });
   }),
 
+  // 注文作成
+  graphql.mutation('CreateOrder', async () => {
+    await delay(300);
+    return HttpResponse.json({
+      data: {
+        createOrder: {
+          success: true,
+          order: {
+            id: `order-${Date.now()}`,
+            totalPrice: 0,
+            items: [],
+            createdAt: new Date().toISOString(),
+          },
+          message: null,
+        },
+      },
+    });
+  }),
+
   // ログインミューテーション
   graphql.mutation('Login', async ({ variables }) => {
     // NOTE: responseを遅延させる

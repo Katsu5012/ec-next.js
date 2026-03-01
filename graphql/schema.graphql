@@ -46,9 +46,42 @@ type Query {
   productReviews(productId: ID!): ProductReviews!
 }
 
+input ShippingAddressInput {
+  name: String!
+  postalCode: String!
+  prefecture: String!
+  address: String!
+  phone: String!
+}
+
+input CreateOrderInput {
+  shippingAddress: ShippingAddressInput!
+}
+
+type OrderItem {
+  productId: ID!
+  productName: String!
+  price: Int!
+  quantity: Int!
+}
+
+type Order {
+  id: ID!
+  totalPrice: Int!
+  items: [OrderItem!]!
+  createdAt: String!
+}
+
+type CreateOrderPayload {
+  success: Boolean!
+  order: Order
+  message: String
+}
+
 type Mutation {
   addToCart(input: AddToCartInput!): AddToCartPayload!
   login(input: LoginInput!): LoginResponse!
+  createOrder(input: CreateOrderInput!): CreateOrderPayload!
 }
 
 input LoginInput {
