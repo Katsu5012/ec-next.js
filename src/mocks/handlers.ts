@@ -132,6 +132,43 @@ export const handlers = [
     });
   }),
 
+  // レビュー投稿
+  graphql.mutation('CreateReview', async ({ variables }) => {
+    await delay(200);
+    const { input } = variables as {
+      input: { productId: string; rating: number; comment: string };
+    };
+
+    if (!input.comment.trim()) {
+      return HttpResponse.json({
+        data: {
+          createReview: {
+            success: false,
+            review: null,
+            message: 'コメントを入力してください',
+          },
+        },
+      });
+    }
+
+    return HttpResponse.json({
+      data: {
+        createReview: {
+          success: true,
+          review: {
+            id: `review-${Date.now()}`,
+            userId: 'user-demo',
+            userName: 'デモユーザー',
+            rating: input.rating,
+            comment: input.comment,
+            createdAt: new Date().toISOString(),
+          },
+          message: 'レビューを投稿しました',
+        },
+      },
+    });
+  }),
+
   // ログインミューテーション
   graphql.mutation('Login', async ({ variables }) => {
     // NOTE: responseを遅延させる

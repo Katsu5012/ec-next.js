@@ -21,6 +21,7 @@ type Documents = {
   '\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n': typeof types.GetProductReviewsQueryDocument;
   '\n  fragment ProductReviewFragment on Review {\n    id\n    userId\n    userName\n    rating\n    comment\n    createdAt\n  }\n': typeof types.ProductReviewFragmentFragmentDoc;
   '\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n': typeof types.ProductReviewsFragmentFragmentDoc;
+  '\n  mutation CreateReview($input: CreateReviewInput!) {\n    createReview(input: $input) {\n      success\n      message\n      review {\n        id\n        userId\n        userName\n        rating\n        comment\n        createdAt\n      }\n    }\n  }\n': typeof types.CreateReviewDocument;
   '\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      token\n      user {\n        id\n        email\n        name\n      }\n    }\n  }\n': typeof types.LoginDocument;
   '\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n': typeof types.ProductsQueryDocument;
   '\n  query GetProductQuery($id: ID!) {\n    product(id: $id) {\n      id\n      name\n      ...ProductDetailFragment\n    }\n  }\n': typeof types.GetProductQueryDocument;
@@ -40,6 +41,8 @@ const documents: Documents = {
     types.ProductReviewFragmentFragmentDoc,
   '\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n':
     types.ProductReviewsFragmentFragmentDoc,
+  '\n  mutation CreateReview($input: CreateReviewInput!) {\n    createReview(input: $input) {\n      success\n      message\n      review {\n        id\n        userId\n        userName\n        rating\n        comment\n        createdAt\n      }\n    }\n  }\n':
+    types.CreateReviewDocument,
   '\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      token\n      user {\n        id\n        email\n        name\n      }\n    }\n  }\n':
     types.LoginDocument,
   '\n  query ProductsQuery {\n    products {\n      id\n      ...ProductCardFragment\n    }\n  }\n':
@@ -104,6 +107,12 @@ export function graphql(
 export function graphql(
   source: '\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n'
 ): (typeof documents)['\n  fragment ProductReviewsFragment on ProductReviews {\n    productId\n    averageRating\n    totalCount\n    reviews {\n      id\n      ...ProductReviewFragment\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation CreateReview($input: CreateReviewInput!) {\n    createReview(input: $input) {\n      success\n      message\n      review {\n        id\n        userId\n        userName\n        rating\n        comment\n        createdAt\n      }\n    }\n  }\n'
+): (typeof documents)['\n  mutation CreateReview($input: CreateReviewInput!) {\n    createReview(input: $input) {\n      success\n      message\n      review {\n        id\n        userId\n        userName\n        rating\n        comment\n        createdAt\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
