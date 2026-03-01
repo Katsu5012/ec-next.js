@@ -67,7 +67,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
         </div>
 
         {/* リロードボタン */}
-        {onRefresh && (
+        {onRefresh ? (
           <button
             onClick={onRefresh}
             disabled={isRefreshing}
@@ -88,7 +88,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
             </svg>
             {isRefreshing ? '更新中...' : '最新に更新'}
           </button>
-        )}
+        ) : null}
       </div>
 
       {/* レビューリスト */}

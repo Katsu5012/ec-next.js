@@ -68,12 +68,12 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ data }) => {
             </span>
           </div>
 
-          {product.description && (
+          {product.description ? (
             <div className="border-t pt-4">
               <h2 className="text-lg font-semibold mb-2 text-gray-900">商品説明</h2>
               <p className="text-gray-700 whitespace-pre-line">{product.description}</p>
             </div>
-          )}
+          ) : null}
 
           {/* 数量選択 */}
           <div className="border-t pt-4">

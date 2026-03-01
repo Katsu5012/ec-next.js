@@ -210,6 +210,7 @@ graphql.query('GetProducts', () => {
 3. **MSW Service Workerファイルは Git にコミットしない**（`.gitignore` に追加済み）
 4. **Pages Router使用** - App Routerのパターンを使わないこと
 5. **localStorage の状態管理** - カートと選択商品は永続化される仕様
+6. **コードを変更したら必ず `pnpm tsc --noEmit` を実行してTypeScriptエラーがないことを確認する**
 
 ## データフロー
 

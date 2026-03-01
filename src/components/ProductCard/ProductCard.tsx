@@ -59,9 +59,9 @@ export const ProductCard = ({ data }: Props) => {
         <div className="p-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
 
-          {product.description && (
+          {product.description ? (
             <p className="text-gray-600 text-sm mb-3">{product.description}</p>
-          )}
+          ) : null}
 
           <div className="flex items-center justify-between mb-4">
             <span className="text-2xl font-bold text-gray-900">
@@ -71,7 +71,7 @@ export const ProductCard = ({ data }: Props) => {
           </div>
 
           <button
-            onClick={(e) => handleSelectProduct(e)}
+            onClick={handleSelectProduct}
             disabled={product.stock === 0}
             className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${
               product.stock === 0

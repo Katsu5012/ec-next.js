@@ -68,7 +68,9 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
           <div className="md:w-1/2 p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h2>
 
-            {product.description && <p className="text-gray-600 mb-4">{product.description}</p>}
+            {product.description ? (
+              <p className="text-gray-600 mb-4">{product.description}</p>
+            ) : null}
 
             <div className="mb-6">
               <div className="flex items-baseline gap-2 mb-2">
@@ -170,7 +172,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
                 onClick={handleAddToCart}
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
               >
-                {hasInCart ? 'カートに追加' : 'カートに追加'}
+                カートに追加
               </button>
 
               <button
