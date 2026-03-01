@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCart } from '../../hooks/useCart';
 import { useAuth } from '../../hooks/useAuth';
+import { cn } from '@/utils/cn';
 
 const LOGO_ICON = (
   <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,43 +65,22 @@ export const Header: React.FC = () => {
           <nav className="flex items-center gap-6">
             {/* ページインジケーター */}
             <div className="hidden md:flex items-center gap-2 text-sm">
-              <span
-                className={`px-3 py-1 rounded-full ${
-                  currentPage === 'products'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                商品一覧
-              </span>
-              <span className="text-gray-400">→</span>
-              <span
-                className={`px-3 py-1 rounded-full ${
-                  currentPage === 'quantity'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                購入数選択
-              </span>
-              <span className="text-gray-400">→</span>
-              <span
-                className={`px-3 py-1 rounded-full ${
-                  currentPage === 'cart' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                カート
-              </span>
-              <span className="text-gray-400">→</span>
-              <span
-                className={`px-3 py-1 rounded-full ${
-                  currentPage === 'checkout'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                購入手続き
-              </span>
+              {(['products', 'quantity', 'cart', 'checkout'] as const).map((page, i) => {
+                const labels = { products: '商品一覧', quantity: '購入数選択', cart: 'カート', checkout: '購入手続き' };
+                return (
+                  <React.Fragment key={page}>
+                    {i > 0 && <span className="text-gray-400">→</span>}
+                    <span
+                      className={cn(
+                        'px-3 py-1 rounded-full',
+                        currentPage === page ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+                      )}
+                    >
+                      {labels[page]}
+                    </span>
+                  </React.Fragment>
+                );
+              })}
             </div>
 
             {/* カートアイコン */}
@@ -121,9 +101,15 @@ export const Header: React.FC = () => {
             {mounted && user && (
               <div className="flex items-center space-x-4">
                 <span className="text-sm">{user.name}</span>
+                <Link
+                  href="/orders"
+                  className="text-sm text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  注文履歴
+                </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-sm hover:text-blue-200 transition-colors"
+                  className="text-sm text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   ログアウト
                 </button>

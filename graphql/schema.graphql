@@ -44,6 +44,7 @@ type Query {
   products: [Product!]!
   product(id: ID!): Product
   productReviews(productId: ID!): ProductReviews!
+  orders: [Order!]!
 }
 
 input ShippingAddressInput {
@@ -65,11 +66,20 @@ type OrderItem {
   quantity: Int!
 }
 
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
 type Order {
   id: ID!
   totalPrice: Int!
   items: [OrderItem!]!
   createdAt: String!
+  status: OrderStatus!
 }
 
 type CreateOrderPayload {

@@ -15,6 +15,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 type Documents = {
   '\n  mutation CreateOrder($input: CreateOrderInput!) {\n    createOrder(input: $input) {\n      success\n      order {\n        id\n        totalPrice\n        createdAt\n      }\n      message\n    }\n  }\n': typeof types.CreateOrderDocument;
+  '\n  query GetOrdersQuery {\n    orders {\n      id\n      createdAt\n      totalPrice\n      status\n      items {\n        productId\n        productName\n        price\n        quantity\n      }\n    }\n  }\n': typeof types.GetOrdersQueryDocument;
   '\n  fragment ProductCardFragment on Product {\n    id\n    name\n    price\n    imageUrl\n    description\n    stock\n  }\n': typeof types.ProductCardFragmentFragmentDoc;
   '\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n': typeof types.ProductDetailFragmentFragmentDoc;
   '\n  query GetProductReviewsQuery($productId: ID!) {\n    productReviews(productId: $productId) {\n      ...ProductReviewsFragment\n    }\n  }\n': typeof types.GetProductReviewsQueryDocument;
@@ -27,6 +28,8 @@ type Documents = {
 const documents: Documents = {
   '\n  mutation CreateOrder($input: CreateOrderInput!) {\n    createOrder(input: $input) {\n      success\n      order {\n        id\n        totalPrice\n        createdAt\n      }\n      message\n    }\n  }\n':
     types.CreateOrderDocument,
+  '\n  query GetOrdersQuery {\n    orders {\n      id\n      createdAt\n      totalPrice\n      status\n      items {\n        productId\n        productName\n        price\n        quantity\n      }\n    }\n  }\n':
+    types.GetOrdersQueryDocument,
   '\n  fragment ProductCardFragment on Product {\n    id\n    name\n    price\n    imageUrl\n    description\n    stock\n  }\n':
     types.ProductCardFragmentFragmentDoc,
   '\n  fragment ProductDetailFragment on Product {\n    id\n    name\n    price\n    description\n    imageUrl\n    stock\n  }\n':
@@ -65,6 +68,12 @@ export function graphql(source: string): unknown;
 export function graphql(
   source: '\n  mutation CreateOrder($input: CreateOrderInput!) {\n    createOrder(input: $input) {\n      success\n      order {\n        id\n        totalPrice\n        createdAt\n      }\n      message\n    }\n  }\n'
 ): (typeof documents)['\n  mutation CreateOrder($input: CreateOrderInput!) {\n    createOrder(input: $input) {\n      success\n      order {\n        id\n        totalPrice\n        createdAt\n      }\n      message\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query GetOrdersQuery {\n    orders {\n      id\n      createdAt\n      totalPrice\n      status\n      items {\n        productId\n        productName\n        price\n        quantity\n      }\n    }\n  }\n'
+): (typeof documents)['\n  query GetOrdersQuery {\n    orders {\n      id\n      createdAt\n      totalPrice\n      status\n      items {\n        productId\n        productName\n        price\n        quantity\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

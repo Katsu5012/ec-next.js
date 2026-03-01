@@ -1,6 +1,7 @@
 import { delay, graphql, HttpResponse } from 'msw';
 import { mockProducts } from '../data/products';
 import { mockReviews } from '@/data/reviews';
+import { mockOrders } from '@/data/orders';
 
 export const handlers = [
   // 商品一覧取得
@@ -117,6 +118,16 @@ export const handlers = [
           },
           message: null,
         },
+      },
+    });
+  }),
+
+  // 注文履歴取得
+  graphql.query('GetOrdersQuery', async () => {
+    await delay(200);
+    return HttpResponse.json({
+      data: {
+        orders: mockOrders,
       },
     });
   }),
