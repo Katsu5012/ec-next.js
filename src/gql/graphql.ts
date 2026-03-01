@@ -167,33 +167,6 @@ export type ProductReviewsFragmentFragment = {
   >;
 } & { ' $fragmentName'?: 'ProductReviewsFragmentFragment' };
 
-export type AddToCartMutationVariables = Exact<{
-  input: AddToCartInput;
-}>;
-
-export type AddToCartMutation = {
-  __typename?: 'Mutation';
-  addToCart: {
-    __typename?: 'AddToCartPayload';
-    success: boolean;
-    message?: string | null;
-    cartItem?: {
-      __typename?: 'CartItem';
-      quantity: number;
-      addedAt: string;
-      product: {
-        __typename?: 'Product';
-        id: string;
-        name: string;
-        price: number;
-        imageUrl: string;
-        stock: number;
-        description?: string | null;
-      };
-    } | null;
-  };
-};
-
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
@@ -421,75 +394,6 @@ export const GetProductReviewsQueryDocument = {
     },
   ],
 } as unknown as DocumentNode<GetProductReviewsQueryQuery, GetProductReviewsQueryQueryVariables>;
-export const AddToCartDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'AddToCart' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'AddToCartInput' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'addToCart' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'input' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'input' } },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'success' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'message' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'cartItem' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'product' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'price' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'imageUrl' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'stock' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                          ],
-                        },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'quantity' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'addedAt' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<AddToCartMutation, AddToCartMutationVariables>;
 export const LoginDocument = {
   kind: 'Document',
   definitions: [
