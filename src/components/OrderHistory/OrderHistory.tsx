@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'urql';
 import { graphql } from '@/gql';
 import { OrderStatus } from '@/gql/graphql';
+import { cn } from '@/utils/cn';
 
 const GET_ORDERS = graphql(`
   query GetOrdersQuery {
@@ -88,7 +89,7 @@ export const OrderHistory: React.FC = () => {
                   </div>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${STATUS_COLOR[order.status]}`}
+                  className={cn('px-3 py-1 rounded-full text-sm font-medium', STATUS_COLOR[order.status])}
                 >
                   {STATUS_LABEL[order.status]}
                 </span>

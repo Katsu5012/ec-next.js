@@ -1,10 +1,5 @@
 name: Claude Code Review
 
-permissions:
-  contents: read
-  pull-requests: write
-  id-token: write
-
 on:
   pull_request:
     types: [opened]
@@ -12,6 +7,12 @@ on:
 jobs:
   review:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.user.type != 'Bot'
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+      id-token: write
     steps:
       - uses: actions/checkout@v6
         with:
