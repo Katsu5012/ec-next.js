@@ -226,6 +226,22 @@ graphql.query('GetProducts', () => {
   └→ localStorage同期
 ```
 
+## 利用可能なスキル
+
+以下のスキルが利用可能です。該当タスクでは**必ず**対応するスキルを参照・使用してください。
+
+| スキル名                      | 場所                                                  | 使用タイミング                                                 |
+| ----------------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| `web-design-guidelines`       | `.claude/skills/web-design-guidelines/SKILL.md`       | UIレビュー・アクセシビリティ確認・デザイン監査                 |
+| `vercel-react-best-practices` | `.agents/skills/vercel-react-best-practices/SKILL.md` | Reactコンポーネント作成・パフォーマンス改善・Next.jsページ実装 |
+| `vercel-composition-patterns` | `.agents/skills/vercel-composition-patterns/SKILL.md` | コンポーネント設計・boolean props整理・Compound Component検討  |
+
+### 各スキルの発動条件
+
+- **UIレビュー・アクセシビリティチェックを依頼されたとき** → `web-design-guidelines`
+- **Reactコンポーネントを書く・レビューする・リファクタするとき** → `vercel-react-best-practices`
+- **コンポーネント設計・Props設計を検討するとき** → `vercel-composition-patterns`
+
 ## 参考リソース
 
 - スキーマ定義: `src/graphql/schema.graphql`
