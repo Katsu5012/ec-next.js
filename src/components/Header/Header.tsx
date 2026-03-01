@@ -121,6 +121,12 @@ export const Header: React.FC = () => {
             {mounted && user && (
               <div className="flex items-center space-x-4">
                 <span className="text-sm">{user.name}</span>
+                <Link
+                  href="/orders"
+                  className="text-sm text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  注文履歴
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-sm hover:text-blue-200 transition-colors"

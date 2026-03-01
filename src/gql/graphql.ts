@@ -85,6 +85,7 @@ export type Order = {
   createdAt: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   items: Array<OrderItem>;
+  status: OrderStatus;
   totalPrice: Scalars['Int']['output'];
 };
 
@@ -95,6 +96,14 @@ export type OrderItem = {
   productName: Scalars['String']['output'];
   quantity: Scalars['Int']['output'];
 };
+
+export enum OrderStatus {
+  Cancelled = 'CANCELLED',
+  Delivered = 'DELIVERED',
+  Pending = 'PENDING',
+  Processing = 'PROCESSING',
+  Shipped = 'SHIPPED',
+}
 
 export type Product = {
   __typename?: 'Product';
@@ -116,6 +125,7 @@ export type ProductReviews = {
 
 export type Query = {
   __typename?: 'Query';
+  orders: Array<Order>;
   product?: Maybe<Product>;
   productReviews: ProductReviews;
   products: Array<Product>;
@@ -166,6 +176,26 @@ export type CreateOrderMutation = {
     message?: string | null;
     order?: { __typename?: 'Order'; id: string; totalPrice: number; createdAt: string } | null;
   };
+};
+
+export type GetOrdersQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetOrdersQueryQuery = {
+  __typename?: 'Query';
+  orders: Array<{
+    __typename?: 'Order';
+    id: string;
+    createdAt: string;
+    totalPrice: number;
+    status: OrderStatus;
+    items: Array<{
+      __typename?: 'OrderItem';
+      productId: string;
+      productName: string;
+      price: number;
+      quantity: number;
+    }>;
+  }>;
 };
 
 export type ProductCardFragmentFragment = {
@@ -421,6 +451,47 @@ export const CreateOrderDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateOrderMutation, CreateOrderMutationVariables>;
+export const GetOrdersQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetOrdersQuery' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'orders' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'totalPrice' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'status' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'productId' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'productName' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'price' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'quantity' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetOrdersQueryQuery, GetOrdersQueryQueryVariables>;
 export const GetProductReviewsQueryDocument = {
   kind: 'Document',
   definitions: [
