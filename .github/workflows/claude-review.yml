@@ -16,5 +16,4 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: "/review"
-          claude_args: "--max-turns 5"
+          prompt: "このPRの変更をレビューしてください。コード品質、バグの可能性、改善点についてコメントしてください。"
