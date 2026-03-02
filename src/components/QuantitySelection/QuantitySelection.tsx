@@ -1,6 +1,11 @@
 import React from 'react';
 import { useSelectedProduct } from '@/hooks/useSelectedProduct';
 import { useCart } from '@/hooks/useCart';
+import { Info, Minus, Plus } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface QuantitySelectionProps {
   onComplete: () => void;
@@ -17,13 +22,10 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
   if (!selectedProduct) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-        <p className="text-gray-600 mb-4">商品が選択されていません</p>
-        <button
-          onClick={onCancel}
-          className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
-        >
+        <p className="text-muted-foreground mb-4">商品が選択されていません</p>
+        <Button variant="secondary" onClick={onCancel}>
           商品一覧に戻る
-        </button>
+        </Button>
       </div>
     );
   }
@@ -52,7 +54,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-gray-900">購入数の選択</h1>
 
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <Card className="shadow-lg overflow-hidden">
         <div className="md:flex">
           {/* 商品画像 */}
           <div className="md:w-1/2">
@@ -65,7 +67,7 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
           </div>
 
           {/* 商品情報・数量選択 */}
-          <div className="md:w-1/2 p-6">
+          <CardContent className="md:w-1/2 p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h2>
 
             {product.description ? (
@@ -77,38 +79,24 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
                 <span className="text-3xl font-bold text-gray-900">
                   ¥{product.price.toLocaleString()}
                 </span>
-                <span className="text-sm text-gray-500">/ 個</span>
+                <span className="text-sm text-muted-foreground">/ 個</span>
               </div>
-              <p className="text-sm text-gray-500">在庫: {product.stock}個</p>
+              <p className="text-sm text-muted-foreground">在庫: {product.stock}個</p>
             </div>
 
             {/* カート内の既存数量の表示 */}
-            {hasInCart && (
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="flex items-center gap-2 mb-1">
-                  <svg
-                    className="w-5 h-5 text-blue-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span className="text-sm font-semibold text-blue-900">カート内の状態</span>
-                </div>
-                <p className="text-sm text-blue-800">
-                  この商品は既に{cartQuantity}個カートに入っています
-                </p>
-                <p className="text-xs text-blue-700 mt-1">
-                  追加すると合計{cartQuantity + quantity}個になります
-                </p>
-              </div>
-            )}
+            {hasInCart ? (
+              <Alert className="mb-6">
+                <Info className="h-4 w-4" />
+                <AlertTitle>カート内の状態</AlertTitle>
+                <AlertDescription>
+                  <p>この商品は既に{cartQuantity}個カートに入っています</p>
+                  <p className="text-xs mt-1">
+                    追加すると合計{cartQuantity + quantity}個になります
+                  </p>
+                </AlertDescription>
+              </Alert>
+            ) : null}
 
             {/* 数量選択 */}
             <div className="mb-6">
@@ -117,37 +105,45 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
               </label>
 
               <div className="flex items-center gap-3">
-                <button
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="w-12 h-12"
                   onClick={decrementQuantity}
                   disabled={quantity <= 1}
-                  className="w-12 h-12 rounded-lg border-2 border-gray-300 text-gray-700 font-bold text-xl hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  aria-label="-"
                 >
-                  -
-                </button>
+                  <Minus className="h-5 w-5" />
+                </Button>
 
-                <input
+                <Input
                   type="number"
-                  min="1"
+                  min={1}
                   max={product.stock}
                   value={quantity}
                   onChange={handleQuantityInput}
-                  className="w-24 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                  className="w-24 h-12 text-center text-xl font-bold"
                 />
 
-                <button
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="w-12 h-12"
                   onClick={incrementQuantity}
                   disabled={quantity >= product.stock}
-                  className="w-12 h-12 rounded-lg border-2 border-gray-300 text-gray-700 font-bold text-xl hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  aria-label="+"
                 >
-                  +
-                </button>
+                  <Plus className="h-5 w-5" />
+                </Button>
               </div>
 
-              <p className="text-sm text-gray-500 mt-2">最大 {product.stock}個まで選択できます</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                最大 {product.stock}個まで選択できます
+              </p>
             </div>
 
             {/* 合計金額 */}
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <div className="bg-muted rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-700 font-semibold">
                   {hasInCart ? '追加分の小計' : '小計'}
@@ -156,38 +152,37 @@ export const QuantitySelection: React.FC<QuantitySelectionProps> = ({ onComplete
                   ¥{totalPrice.toLocaleString()}
                 </span>
               </div>
-              {hasInCart && (
+              {hasInCart ? (
                 <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
                   <span className="text-gray-600">カート追加後の合計</span>
                   <span className="font-bold text-gray-900">
                     ¥{((cartQuantity + quantity) * product.price).toLocaleString()}
                   </span>
                 </div>
-              )}
+              ) : null}
             </div>
 
             {/* アクションボタン */}
             <div className="space-y-3">
-              <button
-                onClick={handleAddToCart}
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-              >
+              <Button onClick={handleAddToCart} className="w-full" size="lg">
                 カートに追加
-              </button>
+              </Button>
 
-              <button
+              <Button
+                variant="outline"
+                className="w-full"
+                size="lg"
                 onClick={() => {
                   clearSelection();
                   onCancel();
                 }}
-                className="w-full bg-white border-2 border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
               >
                 キャンセル
-              </button>
+              </Button>
             </div>
-          </div>
+          </CardContent>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

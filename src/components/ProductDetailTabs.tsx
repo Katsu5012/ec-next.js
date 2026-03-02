@@ -4,6 +4,8 @@ import { useQuery } from 'urql';
 import { ProductReviews } from './ProductReviews';
 import { graphql, type FragmentType } from '@/gql';
 import { ProductDetailFragment, ProductDetail } from './ProductDetail';
+import { Loader2 } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type TabType = 'info' | 'reviews';
 
@@ -37,57 +39,33 @@ export const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ productDat
   };
 
   return (
-    <div>
-      {/* タブナビゲーション */}
-      <div className="border-b border-gray-200">
-        <nav className="flex gap-8" aria-label="Tabs">
-          <button
-            onClick={() => setActiveTab('info')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-              activeTab === 'info'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            商品情報
-          </button>
-          <button
-            onClick={() => setActiveTab('reviews')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-              activeTab === 'reviews'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            レビュー
-          </button>
-        </nav>
-      </div>
+    <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as TabType)}>
+      <TabsList>
+        <TabsTrigger value="info">商品情報</TabsTrigger>
+        <TabsTrigger value="reviews">レビュー</TabsTrigger>
+      </TabsList>
 
-      {/* タブコンテンツ */}
-      <div className="mt-6">
-        {activeTab === 'info' && <ProductDetail data={productData} />}
+      <TabsContent value="info" className="mt-6">
+        <ProductDetail data={productData} />
+      </TabsContent>
 
-        {activeTab === 'reviews' && (
-          <>
-            {reviewsFetching && !reviewsData ? (
-              <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              </div>
-            ) : reviewsData?.productReviews ? (
-              <ProductReviews
-                data={reviewsData.productReviews}
-                onRefresh={handleRefreshReviews}
-                isRefreshing={reviewsFetching}
-              />
-            ) : (
-              <div className="text-center py-12 text-gray-500">
-                レビューの読み込みに失敗しました
-              </div>
-            )}
-          </>
+      <TabsContent value="reviews" className="mt-6">
+        {reviewsFetching && !reviewsData ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          </div>
+        ) : reviewsData?.productReviews ? (
+          <ProductReviews
+            data={reviewsData.productReviews}
+            onRefresh={handleRefreshReviews}
+            isRefreshing={reviewsFetching}
+          />
+        ) : (
+          <div className="text-center py-12 text-muted-foreground">
+            レビューの読み込みに失敗しました
+          </div>
         )}
-      </div>
-    </div>
+      </TabsContent>
+    </Tabs>
   );
 };
