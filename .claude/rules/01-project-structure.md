@@ -2,15 +2,17 @@
 
 このプロジェクトは以下のディレクトリ構成に従う。ファイルの新規作成・移動時は必ずこの構成を守ること。
 
-```
-pages/                          # Next.js Pages Router（App Routerではない）
-├── _app.tsx                    # urql Provider設定
-├── _document.tsx               # HTML構造
-├── index.tsx                   # 商品一覧（GraphQL Query）
-├── quantity.tsx                # 購入数選択
-└── cart.tsx                    # カート
+**注意: ページファイルは `src/pages/` に配置する。ルート直下に `pages/` ディレクトリを作成してはならない（Next.jsが `src/pages/` を無視してしまうため）。**
 
+```
 src/
+├── pages/                      # Next.js Pages Router（App Routerではない）
+│   ├── _app.tsx                # urql Provider設定
+│   ├── _document.tsx           # HTML構造
+│   ├── index.tsx               # 商品一覧（GraphQL Query）
+│   ├── quantity.tsx            # 購入数選択
+│   └── cart.tsx                # カート
+├──
 ├── graphql/                    # GraphQL関連（スキーマ・クエリ・ミューテーション）
 │   ├── schema.graphql          # スキーマ定義（変更後は pnpm codegen 必須）
 │   ├── queries.ts              # クエリ定義
@@ -35,7 +37,7 @@ src/
 
 ## 配置ルール
 
-- ページコンポーネント → `pages/`
+- ページコンポーネント → `src/pages/`（ルート直下の `pages/` に置かないこと）
 - 再利用可能なUIコンポーネント → `src/components/`
 - カスタムHooks → `src/hooks/`
 - GraphQLクエリ/ミューテーション → `src/graphql/`

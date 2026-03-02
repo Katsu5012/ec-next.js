@@ -393,7 +393,7 @@ export const Empty: Story = {
 | ----------------- | -------------------------- | ----------------------------------------- |
 | `src/components/` | `src/components/CLAUDE.md` | テスト・Storybook必須、スキル読み込み必須 |
 | `src/hooks/`      | `src/hooks/CLAUDE.md`      | Hooks設計パターン、テスト必須             |
-| `pages/`          | `pages/CLAUDE.md`          | Pages Router、ルーティング、データフロー  |
+| `src/pages/`      | `src/pages/CLAUDE.md`      | Pages Router、ルーティング、データフロー  |
 | `src/graphql/`    | `src/graphql/CLAUDE.md`    | codegen必須、Fragment Masking、MSW連携    |
 
 また `.claude/rules/` に全タスク共通のルールを配置している：
