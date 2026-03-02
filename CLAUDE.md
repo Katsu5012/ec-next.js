@@ -343,7 +343,7 @@ export const Empty: Story = {
   └→ localStorage同期
 ```
 
-## 利用可能なスキル
+## 利用可能なスキル（スキップ厳禁）
 
 以下のスキルが利用可能です。該当タスクでは**必ず**対応するスキルを参照・使用してください。
 
@@ -358,6 +358,50 @@ export const Empty: Story = {
 - **UIレビュー・アクセシビリティチェックを依頼されたとき** → `web-design-guidelines`
 - **Reactコンポーネントを書く・レビューする・リファクタするとき** → `vercel-react-best-practices`
 - **コンポーネント設計・Props設計を検討するとき** → `vercel-composition-patterns`
+
+### ⚠️ スキルルール読み込みの必須手順（絶対にスキップしてはならない）
+
+**Reactコンポーネントに関わる作業（新規作成・修正・レビュー・リファクタ）を行う前に、必ず以下のルールファイルを全て読み込むこと。読み込まずに作業を開始してはならない。**
+
+```bash
+# 1. React ベストプラクティスのルール（全ファイル必読）
+.agents/skills/vercel-react-best-practices/rules/*.md
+
+# 2. コンポジションパターンのルール（全ファイル必読）
+.agents/skills/vercel-composition-patterns/rules/*.md
+```
+
+**UIレビュー・アクセシビリティに関わる作業を行う前に、必ず以下を読み込むこと：**
+
+```bash
+# 3. Webデザインガイドライン
+.claude/skills/web-design-guidelines/SKILL.md
+```
+
+**手順:**
+
+1. 該当タスクを受けたら、**まず最初に**上記ルールファイルを読み込む
+2. ルールの内容を理解した上で、コードの作成・修正に着手する
+3. 作業中もルールに違反していないか常に確認する
+4. ルールを読まずにコードを書き始めた場合、それは手順違反である
+
+## ディレクトリ別ルール
+
+各ディレクトリに `CLAUDE.md` を配置している。該当ディレクトリで作業する際は**必ず参照すること**：
+
+| ディレクトリ      | ルールファイル             | 内容                                      |
+| ----------------- | -------------------------- | ----------------------------------------- |
+| `src/components/` | `src/components/CLAUDE.md` | テスト・Storybook必須、スキル読み込み必須 |
+| `src/hooks/`      | `src/hooks/CLAUDE.md`      | Hooks設計パターン、テスト必須             |
+| `pages/`          | `pages/CLAUDE.md`          | Pages Router、ルーティング、データフロー  |
+| `src/graphql/`    | `src/graphql/CLAUDE.md`    | codegen必須、Fragment Masking、MSW連携    |
+
+また `.claude/rules/` に全タスク共通のルールを配置している：
+
+| ルールファイル                             | 内容                         |
+| ------------------------------------------ | ---------------------------- |
+| `.claude/rules/01-project-structure.md`    | ディレクトリ構成と配置ルール |
+| `.claude/rules/02-skill-rules-required.md` | スキルルール読み込み必須手順 |
 
 ## 参考リソース
 
