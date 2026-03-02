@@ -4,6 +4,9 @@ import { useCart } from '../../hooks/useCart';
 import { useSelectedProduct } from '../../hooks/useSelectedProduct';
 import { FragmentType, graphql, readFragment } from '@/gql';
 import Link from 'next/link';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export const ProductCardFragment = graphql(`
   fragment ProductCardFragment on Product {
@@ -45,18 +48,16 @@ export const ProductCard = ({ data }: Props) => {
 
   return (
     <Link href={`/products/detail?productId=${product.id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+      <Card className="overflow-hidden hover:shadow-lg transition-shadow">
         <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover" />
-          {inCart && (
-            <div className="absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-              カート内: {cartQuantity}個
-            </div>
-          )}
+          {inCart ? (
+            <Badge className="absolute top-2 right-2">カート内: {cartQuantity}個</Badge>
+          ) : null}
         </div>
 
-        <div className="p-4">
+        <CardContent className="p-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
 
           {product.description ? (
@@ -67,22 +68,14 @@ export const ProductCard = ({ data }: Props) => {
             <span className="text-2xl font-bold text-gray-900">
               ¥{product.price.toLocaleString()}
             </span>
-            <span className="text-sm text-gray-500">在庫: {product.stock}個</span>
+            <span className="text-sm text-muted-foreground">在庫: {product.stock}個</span>
           </div>
 
-          <button
-            onClick={handleSelectProduct}
-            disabled={product.stock === 0}
-            className={`w-full py-2 px-4 rounded-lg font-semibold transition-colors ${
-              product.stock === 0
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}
-          >
+          <Button onClick={handleSelectProduct} disabled={product.stock === 0} className="w-full">
             {product.stock === 0 ? '在庫切れ' : '購入数を選択'}
-          </button>
-        </div>
-      </div>
+          </Button>
+        </CardContent>
+      </Card>
     </Link>
   );
 };

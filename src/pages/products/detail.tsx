@@ -6,6 +6,8 @@ import { AuthGuard } from '@/components/AuthGuard';
 import { ProductDetailTabs } from '@/components/ProductDetailTabs';
 import { Header } from '@/components/Header/Header';
 import { graphql } from '@/gql';
+import { Loader2 } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const GetProductQuery = graphql(`
   query GetProductQuery($id: ID!) {
@@ -38,7 +40,7 @@ export default function ProductDetailPage() {
       <AuthGuard>
         <Header />
         <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
         </div>
       </AuthGuard>
     );
@@ -50,8 +52,10 @@ export default function ProductDetailPage() {
         <Header />
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <p className="text-red-600 mb-4">エラーが発生しました: {error.message}</p>
-            <Link href="/" className="text-blue-600 hover:underline">
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>エラーが発生しました: {error.message}</AlertDescription>
+            </Alert>
+            <Link href="/" className="text-primary hover:underline">
               トップページに戻る
             </Link>
           </div>
@@ -66,8 +70,8 @@ export default function ProductDetailPage() {
         <Header />
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <p className="text-gray-600 mb-4">商品が見つかりませんでした</p>
-            <Link href="/" className="text-blue-600 hover:underline">
+            <p className="text-muted-foreground mb-4">商品が見つかりませんでした</p>
+            <Link href="/" className="text-primary hover:underline">
               トップページに戻る
             </Link>
           </div>
@@ -85,11 +89,11 @@ export default function ProductDetailPage() {
         <nav className="mb-6">
           <ol className="flex items-center gap-2 text-sm">
             <li>
-              <Link href="/" className="text-blue-600 hover:underline">
+              <Link href="/" className="text-primary hover:underline">
                 トップ
               </Link>
             </li>
-            <li className="text-gray-500">/</li>
+            <li className="text-muted-foreground">/</li>
             <li className="text-gray-900">{data.product.name}</li>
           </ol>
         </nav>

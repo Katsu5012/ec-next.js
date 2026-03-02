@@ -3,6 +3,8 @@ import { Header } from '@/components/Header/Header';
 import { ProductCard } from '@/components/ProductCard/ProductCard';
 import { AuthGuard } from '@/components/AuthGuard';
 import { graphql } from '@/gql';
+import { Loader2 } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const ProductsQuery = graphql(`
   query ProductsQuery {
@@ -23,20 +25,22 @@ export default function Home() {
       <Header />
       <AuthGuard>
         <main>
-          {fetching && (
+          {fetching ? (
             <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-gray-600">読み込み中...</p>
+              <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
+              <p className="mt-4 text-muted-foreground">読み込み中...</p>
             </div>
-          )}
+          ) : null}
 
-          {error && (
-            <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-              <p className="text-red-600">エラーが発生しました: {error.message}</p>
+          {error ? (
+            <div className="max-w-7xl mx-auto px-4 py-16">
+              <Alert variant="destructive">
+                <AlertDescription>エラーが発生しました: {error.message}</AlertDescription>
+              </Alert>
             </div>
-          )}
+          ) : null}
 
-          {data?.products && (
+          {data?.products ? (
             <div className="max-w-7xl mx-auto px-4 py-8">
               <h1 className="text-3xl font-bold mb-8 text-gray-900">商品一覧</h1>
 
@@ -46,7 +50,7 @@ export default function Home() {
                 })}
               </div>
             </div>
-          )}
+          ) : null}
         </main>
       </AuthGuard>
     </>
