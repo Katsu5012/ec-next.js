@@ -9,7 +9,7 @@
 **作業内容**:
 
 1. GraphQLスキーマに `Order` / `ShippingAddress` / `PlaceOrder` mutation を追加 (`src/graphql/schema.graphql`)
-2. `npm run codegen` で型を生成
+2. `pnpm codegen` で型を生成
 3. MSWハンドラーに `placeOrder` mutation を追加 (`src/mocks/handlers.ts`)
 4. `pages/checkout.tsx` を作成（配送先住所フォーム + 注文確認）
 5. `src/components/Checkout/Checkout.tsx` を作成
@@ -36,7 +36,7 @@
 **作業内容**:
 
 1. GraphQLスキーマに `Order` 型と `orders` クエリを追加
-2. `npm run codegen` で型を生成
+2. `pnpm codegen` で型を生成
 3. MSWハンドラーに `GetOrdersQuery` を追加（モックデータ作成）
 4. `src/data/orders.ts` にモック注文データを作成
 5. `pages/orders.tsx` を作成（AuthGuard で保護）
@@ -53,7 +53,7 @@
 **作業内容**:
 
 1. GraphQLスキーマに `createReview` mutation を追加 (`src/graphql/schema.graphql`)
-2. `npm run codegen` で型を生成
+2. `pnpm codegen` で型を生成
 3. MSWハンドラーに `CreateReview` mutation を追加
 4. `src/components/ProductReviews.tsx` に投稿フォームを追加
    - 星評価セレクター（1〜5）

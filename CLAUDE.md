@@ -18,7 +18,7 @@ Hooks設計パターンを活用し、商品一覧→購入数選択→カート
 # - .storybook/public/mockServiceWorker.js
 
 # 存在しない場合は初期化
-npm run msw:init
+pnpm msw:init
 ```
 
 ### 2. GraphQL型の生成
@@ -26,7 +26,7 @@ npm run msw:init
 GraphQLスキーマから型定義を生成します。スキーマやクエリを変更した場合は必ず実行：
 
 ```bash
-npm run codegen
+pnpm codegen
 ```
 
 ## 技術スタック・バージョン
@@ -81,22 +81,22 @@ src/
 
 ```bash
 # 開発
-npm run dev                     # http://localhost:3000
-npm run storybook               # http://localhost:6006
+pnpm dev                     # http://localhost:3000
+pnpm storybook               # http://localhost:6006
 
 # テスト
-npm test                        # Vitest実行
-npm run test:ui                 # UIモード
-npm run test:coverage           # カバレッジ
+pnpm test                        # Vitest実行
+pnpm test:ui                 # UIモード
+pnpm test:coverage           # カバレッジ
 
 # GraphQL
-npm run codegen                 # スキーマから型生成
+pnpm codegen                 # スキーマから型生成
 
 # MSW
-npm run msw:init                # Service Worker初期化（初回のみ）
+pnpm msw:init                # Service Worker初期化（初回のみ）
 
 # ビルド
-npm run build
+pnpm build
 ```
 
 ## コーディング規約
@@ -106,7 +106,7 @@ npm run build
 #### クエリ・ミューテーション
 
 - `src/graphql/queries.ts` または `src/graphql/mutations.ts` に定義
-- 型安全性のため、必ず `npm run codegen` で型を生成
+- 型安全性のため、必ず `pnpm codegen` で型を生成
 - urqlの `useQuery` と `useMutation` を使用
 
 ```typescript
@@ -302,12 +302,12 @@ export const Empty: Story = {
 ### "Service Worker script does not exist" エラー
 
 **原因**: MSW Service Workerが初期化されていない  
-**解決**: `npm run msw:init`
+**解決**: `pnpm msw:init`
 
 ### GraphQLクエリの型が見つからない
 
 **原因**: 型が生成されていない  
-**解決**: `npm run codegen`
+**解決**: `pnpm codegen`
 
 ### Storybookでコンポーネントがレンダリングされない
 
@@ -321,8 +321,8 @@ export const Empty: Story = {
 
 ## 作業時の注意点
 
-1. **GraphQLスキーマを変更したら必ず `npm run codegen`**
-2. **新しいクエリ/ミューテーションを追加したら必ず `npm run codegen`**
+1. **GraphQLスキーマを変更したら必ず `pnpm codegen`**
+2. **新しいクエリ/ミューテーションを追加したら必ず `pnpm codegen`**
 3. **MSW Service Workerファイルは Git にコミットしない**（`.gitignore` に追加済み）
 4. **Pages Router使用** - App Routerのパターンを使わないこと
 5. **localStorage の状態管理** - カートと選択商品は永続化される仕様

@@ -6,22 +6,22 @@
 
 ```bash
 # すべてのテストを実行
-npm test
+pnpm test
 
 # ウォッチモードで実行
-npm test -- --watch
+pnpm test -- --watch
 
 # UIモードで実行（推奨）
-npm run test:ui
+pnpm test:ui
 
 # カバレッジレポート生成
-npm run test:coverage
+pnpm test:coverage
 
 # 特定のファイルのみテスト
-npm test useCart.test.ts
+pnpm test useCart.test.ts
 
 # 特定のテストケースのみ実行
-npm test -- -t "商品をカートに追加"
+pnpm test -- -t "商品をカートに追加"
 ```
 
 ### テストの書き方
@@ -100,7 +100,7 @@ describe('Cart', () => {
 ### テストカバレッジの確認
 
 ```bash
-npm run test:coverage
+pnpm test:coverage
 ```
 
 生成されたレポートは `coverage/index.html` で確認できます。
@@ -113,10 +113,10 @@ npm run test:coverage
 
 ```bash
 # Storybookを起動
-npm run storybook
+pnpm storybook
 
 # 静的ビルド
-npm run build-storybook
+pnpm build-storybook
 ```
 
 起動後、http://localhost:6006 でコンポーネントカタログが開きます。
@@ -343,11 +343,11 @@ touch src/components/NewComponent.tsx
 
 # 2. Storyを作成して視覚的に確認
 touch src/components/NewComponent.stories.tsx
-npm run storybook
+pnpm storybook
 
 # 3. テストを作成
 touch src/components/NewComponent.test.tsx
-npm test -- --watch
+pnpm test -- --watch
 
 # 4. 実装とテストを繰り返す
 ```
@@ -359,13 +359,13 @@ npm test -- --watch
 # src/hooks/useNewHook.test.ts を作成
 
 # 2. テストを実行（失敗することを確認）
-npm test
+pnpm test
 
 # 3. 実装する
 # src/hooks/useNewHook.ts を作成
 
 # 4. テストをパス
-npm test
+pnpm test
 
 # 5. リファクタリング
 ```
@@ -374,7 +374,7 @@ npm test
 
 ```bash
 # 1. Storybookでコンポーネントを開発
-npm run storybook
+pnpm storybook
 
 # 2. さまざまな状態のStoryを追加
 # - Default
@@ -407,9 +407,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm ci
-      - run: npm test
-      - run: npm run build-storybook
+      - run: pnpm ci
+      - run: pnpm test
+      - run: pnpm build-storybook
 ```
 
 ---

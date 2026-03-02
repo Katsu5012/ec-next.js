@@ -5,7 +5,7 @@
 ## 📋 前提条件
 
 - Node.js 18以上（推奨: 20以上）
-- npm または pnpm
+- pnpm または pnpm
 
 ### 使用している主要パッケージのバージョン
 
@@ -28,7 +28,7 @@ cd ec-site-hooks
 ### 2. 依存関係のインストール
 
 ```bash
-npm install
+pnpm install
 ```
 
 または pnpm を使用する場合：
@@ -42,7 +42,7 @@ pnpm install
 **このステップは必須です。** MSWを使用するには、Service Workerファイルを生成する必要があります。
 
 ```bash
-npm run msw:init
+pnpm msw:init
 ```
 
 このコマンドは以下のファイルを生成します：
@@ -80,7 +80,7 @@ NEXT_PUBLIC_GRAPHQL_ENDPOINT=/api/graphql
 #### Next.js開発サーバー
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ブラウザで http://localhost:3000 を開きます。
@@ -88,7 +88,7 @@ npm run dev
 #### Storybook
 
 ```bash
-npm run storybook
+pnpm storybook
 ```
 
 ブラウザで http://localhost:6006 を開きます。
@@ -97,13 +97,13 @@ npm run storybook
 
 ```bash
 # すべてのテストを実行
-npm test
+pnpm test
 
 # UIモードで実行
-npm run test:ui
+pnpm test:ui
 
 # カバレッジレポート
-npm run test:coverage
+pnpm test:coverage
 ```
 
 ## 📝 GraphQL型生成（オプション）
@@ -111,7 +111,7 @@ npm run test:coverage
 GraphQLスキーマから型定義を生成：
 
 ```bash
-npm run codegen
+pnpm codegen
 ```
 
 生成されるファイル:
@@ -126,13 +126,13 @@ src/graphql/generated/
 
 セットアップが正しく完了したか確認：
 
-- [ ] `npm install` が成功した
-- [ ] `npm run msw:init` を実行した
+- [ ] `pnpm install` が成功した
+- [ ] `pnpm msw:init` を実行した
 - [ ] `public/mockServiceWorker.js` が存在する
 - [ ] `.storybook/public/mockServiceWorker.js` が存在する
-- [ ] `npm run dev` でNext.jsサーバーが起動する
-- [ ] `npm run storybook` でStorybookが起動する
-- [ ] `npm test` でテストが通る
+- [ ] `pnpm dev` でNext.jsサーバーが起動する
+- [ ] `pnpm storybook` でStorybookが起動する
+- [ ] `pnpm test` でテストが通る
 
 ## 🔍 トラブルシューティング
 
@@ -143,7 +143,7 @@ src/graphql/generated/
 **解決方法**:
 
 ```bash
-npm run msw:init
+pnpm msw:init
 ```
 
 **確認**:
@@ -164,7 +164,7 @@ ls -la .storybook/public/mockServiceWorker.js
 ```bash
 # node_modulesを削除して再インストール
 rm -rf node_modules package-lock.json
-npm install
+pnpm install
 ```
 
 ### Storybookで画面が真っ白
@@ -173,7 +173,7 @@ npm install
 
 **解決方法**:
 
-1. `npm run msw:init` を実行
+1. `pnpm msw:init` を実行
 2. ブラウザのキャッシュをクリア
 3. Storybookを再起動
 
@@ -233,13 +233,13 @@ src/graphql/generated/          # GraphQL型定義（codegen後）
 
 ```bash
 # 開発サーバー
-npm run dev
+pnpm dev
 
 # Storybook
-npm run storybook
+pnpm storybook
 
 # テスト
-npm test
+pnpm test
 ```
 
 ## 📝 Tailwind CSS 4への移行について

@@ -19,25 +19,25 @@ React + TypeScript + Tailwind CSS + **Next.js Pages Router** + **GraphQL (urql)*
 
 ```bash
 # 1. 依存関係のインストール
-npm install
+pnpm install
 
 # 2. MSW Service Workerの初期化（初回のみ・重要！）
-npm run msw:init
+pnpm msw:init
 
 # 3. 開発サーバー起動（http://localhost:3000）
-npm run dev
+pnpm dev
 
 # 4. Storybook起動（http://localhost:6006）
-npm run storybook
+pnpm storybook
 
 # 5. テスト実行
-npm test
+pnpm test
 
 # 6. テストUIで実行
-npm run test:ui
+pnpm test:ui
 
 # 7. GraphQL型生成
-npm run codegen
+pnpm codegen
 ```
 
 ## 🛠️ 技術スタック
@@ -56,7 +56,7 @@ npm run codegen
 ### 1. 依存関係のインストール
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. MSW Service Workerの初期化（必須）
@@ -64,7 +64,7 @@ npm install
 **重要**: MSWを使用するには、Service Workerファイルを生成する必要があります。
 
 ```bash
-npm run msw:init
+pnpm msw:init
 ```
 
 このコマンドは以下の2つのディレクトリにService Workerを生成します：
@@ -78,10 +78,10 @@ npm run msw:init
 
 ```bash
 # Next.js開発サーバー
-npm run dev
+pnpm dev
 
 # Storybook
-npm run storybook
+pnpm storybook
 ```
 
 ## 🎯 アーキテクチャ
@@ -210,9 +210,9 @@ const urqlClient = createUrqlClient();
 ## 🧪 テスト
 
 ```bash
-npm test              # テスト実行
-npm run test:ui       # UIモード
-npm run test:coverage # カバレッジ
+pnpm test              # テスト実行
+pnpm test:ui       # UIモード
+pnpm test:coverage # カバレッジ
 ```
 
 - **MSW統合** - GraphQL APIをモック
@@ -222,7 +222,7 @@ npm run test:coverage # カバレッジ
 ## 📖 Storybook
 
 ```bash
-npm run storybook
+pnpm storybook
 ```
 
 - **MSW統合** - GraphQLレスポンスをモック
@@ -282,7 +282,7 @@ npm run storybook
 **解決方法**:
 
 ```bash
-npm run msw:init
+pnpm msw:init
 ```
 
 このコマンドで`public/mockServiceWorker.js`と`.storybook/public/mockServiceWorker.js`が生成されます。
@@ -320,7 +320,7 @@ parameters: {
 **解決方法**:
 
 ```bash
-npm run codegen
+pnpm codegen
 ```
 
 GraphQLスキーマから型定義を生成します。
