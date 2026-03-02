@@ -1,6 +1,5 @@
-// src/components/AuthGuard.tsx
 import { useRouter } from 'next/router';
-import { Lock, Loader2 } from 'lucide-react';
+import { Loader2, Lock } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';

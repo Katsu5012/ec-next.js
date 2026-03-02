@@ -54,6 +54,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
                 <span className="text-3xl font-bold text-yellow-500">
                   {reviewsData.averageRating.toFixed(1)}
                 </span>
+                {/* eslint-disable @eslint-react/no-array-index-key -- 固定5つ星の表示 */}
                 <div className="flex text-yellow-500">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -67,6 +68,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
                     />
                   ))}
                 </div>
+                {/* eslint-enable @eslint-react/no-array-index-key */}
               </div>
               <span className="text-gray-600">{reviewsData.totalCount}件のレビュー</span>
             </div>
@@ -111,6 +113,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
     <div className="pb-4">
       <div className="mb-2 flex items-center gap-4">
         <span className="font-semibold text-gray-900">{review.userName}</span>
+        {/* eslint-disable @eslint-react/no-array-index-key -- 固定5つ星の表示 */}
         <div className="flex text-yellow-500">
           {[...Array(5)].map((_, i) => (
             <Star
@@ -122,6 +125,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
             />
           ))}
         </div>
+        {/* eslint-enable @eslint-react/no-array-index-key */}
         <span className="text-sm text-muted-foreground">
           {new Date(review.createdAt).toLocaleDateString('ja-JP')}
         </span>

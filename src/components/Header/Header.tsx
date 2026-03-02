@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCart } from '../../hooks/useCart';
@@ -12,9 +12,6 @@ export const Header: React.FC = () => {
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), []);
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -55,7 +52,7 @@ export const Header: React.FC = () => {
                 };
                 return (
                   <React.Fragment key={page}>
-                    {i > 0 && <span className="text-muted-foreground">→</span>}
+                    {i > 0 ? <span className="text-muted-foreground">→</span> : null}
                     <Badge variant={currentPage === page ? 'default' : 'secondary'}>
                       {labels[page]}
                     </Badge>
@@ -71,7 +68,7 @@ export const Header: React.FC = () => {
               className="relative rounded-lg p-2 transition-colors hover:bg-muted"
             >
               <ShoppingCart className="h-6 w-6 text-gray-700" />
-              {mounted && totalItems > 0 && user ? (
+              {totalItems > 0 && user ? (
                 <span
                   className={cn(
                     'absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center'
@@ -83,7 +80,7 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* ユーザー情報 */}
-            {mounted && user ? (
+            {user ? (
               <div className="flex items-center space-x-4">
                 <span className="text-sm">{user.name}</span>
                 <Link
