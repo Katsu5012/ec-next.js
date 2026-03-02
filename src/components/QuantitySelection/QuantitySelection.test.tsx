@@ -194,9 +194,9 @@ describe('QuantitySelection', () => {
     const addButton = screen.getByRole('button', { name: 'カートに追加' });
     await user.click(addButton);
 
-    // 選択された商品がクリアされる（キーが削除される）
+    // 選択された商品がクリアされる（useSyncExternalStore ベースのため "null" として保存）
     const selectedProduct = localStorage.getItem('ec-selected-product');
-    expect(selectedProduct).toBeNull();
+    expect(JSON.parse(selectedProduct!)).toBeNull();
 
     // カートに追加されている
     const cartItems = localStorage.getItem('ec-cart-items');
