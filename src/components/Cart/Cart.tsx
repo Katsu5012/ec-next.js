@@ -26,11 +26,11 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
 
   if (cartItems.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="mx-auto max-w-4xl px-4 py-16">
         <div className="text-center">
-          <ShoppingCart className="mx-auto h-24 w-24 text-muted-foreground mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">カートが空です</h2>
-          <p className="text-muted-foreground mb-6">商品を追加してください</p>
+          <ShoppingCart className="mx-auto mb-4 h-24 w-24 text-muted-foreground" />
+          <h2 className="mb-2 text-2xl font-bold text-gray-900">カートが空です</h2>
+          <p className="mb-6 text-muted-foreground">商品を追加してください</p>
           <Button onClick={onContinueShopping} size="lg">
             買い物を続ける
           </Button>
@@ -40,8 +40,8 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mb-8 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">ショッピングカート</h1>
         <Button variant="link" className="text-destructive" onClick={clearCart}>
           カートを空にする
@@ -53,18 +53,18 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
           {cartItems.map((item, index) => (
             <React.Fragment key={item.product.id}>
               {index > 0 ? <Separator /> : null}
-              <div className="flex items-center gap-4 p-4 hover:bg-muted/50 transition-colors">
+              <div className="flex items-center gap-4 p-4 transition-colors hover:bg-muted/50">
                 {/* 商品画像 */}
                 <img
                   src={item.product.imageUrl}
                   alt={item.product.name}
-                  className="w-24 h-24 object-cover rounded-lg"
+                  className="h-24 w-24 rounded-lg object-cover"
                 />
 
                 {/* 商品情報 */}
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.product.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-2">
+                  <h3 className="mb-1 text-lg font-semibold text-gray-900">{item.product.name}</h3>
+                  <p className="mb-2 text-sm text-muted-foreground">
                     ¥{item.product.price.toLocaleString()} / 個
                   </p>
                   <p className="text-xs text-muted-foreground">在庫: {item.product.stock}個</p>
@@ -75,7 +75,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="w-8 h-8"
+                    className="h-8 w-8"
                     onClick={() => updateCartItemQuantity(item.product.id, item.quantity - 1)}
                     aria-label="-"
                   >
@@ -87,7 +87,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="w-8 h-8"
+                    className="h-8 w-8"
                     onClick={() => updateCartItemQuantity(item.product.id, item.quantity + 1)}
                     disabled={item.quantity >= item.product.stock}
                     aria-label="+"
@@ -97,7 +97,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
                 </div>
 
                 {/* 小計 */}
-                <div className="text-right min-w-25">
+                <div className="min-w-25 text-right">
                   <p className="text-lg font-bold text-gray-900">
                     ¥{(item.product.price * item.quantity).toLocaleString()}
                   </p>
@@ -111,7 +111,7 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
                   onClick={() => removeFromCart(item.product.id)}
                   aria-label="削除"
                 >
-                  <Trash2 className="w-5 h-5" />
+                  <Trash2 className="h-5 w-5" />
                 </Button>
               </div>
             </React.Fragment>
@@ -122,13 +122,13 @@ export const Cart: React.FC<CartProps> = ({ onContinueShopping, onCheckout }) =>
       {/* 合計金額 */}
       <Card className="mb-6">
         <CardContent className="p-6">
-          <div className="space-y-2 mb-4">
+          <div className="mb-4 space-y-2">
             <div className="flex justify-between text-muted-foreground">
               <span>商品数</span>
               <span>{totalItems}個</span>
             </div>
             <Separator />
-            <div className="flex justify-between text-2xl font-bold text-gray-900 pt-2">
+            <div className="flex justify-between pt-2 text-2xl font-bold text-gray-900">
               <span>合計金額 ¥{totalPrice.toLocaleString()}</span>
             </div>
           </div>

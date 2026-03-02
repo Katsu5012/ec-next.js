@@ -61,7 +61,7 @@ export const ProductDetailTabs: React.FC<ProductDetailTabsProps> = ({ productDat
             isRefreshing={reviewsFetching}
           />
         ) : (
-          <div className="text-center py-12 text-muted-foreground">
+          <div className="py-12 text-center text-muted-foreground">
             レビューの読み込みに失敗しました
           </div>
         )}

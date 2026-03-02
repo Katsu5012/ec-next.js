@@ -26,14 +26,14 @@ export default function Home() {
       <AuthGuard>
         <main>
           {fetching ? (
-            <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+            <div className="mx-auto max-w-7xl px-4 py-16 text-center">
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
               <p className="mt-4 text-muted-foreground">読み込み中...</p>
             </div>
           ) : null}
 
           {error ? (
-            <div className="max-w-7xl mx-auto px-4 py-16">
+            <div className="mx-auto max-w-7xl px-4 py-16">
               <Alert variant="destructive">
                 <AlertDescription>エラーが発生しました: {error.message}</AlertDescription>
               </Alert>
@@ -41,10 +41,10 @@ export default function Home() {
           ) : null}
 
           {data?.products ? (
-            <div className="max-w-7xl mx-auto px-4 py-8">
-              <h1 className="text-3xl font-bold mb-8 text-gray-900">商品一覧</h1>
+            <div className="mx-auto max-w-7xl px-4 py-8">
+              <h1 className="mb-8 text-3xl font-bold text-gray-900">商品一覧</h1>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {data.products.map((p) => {
                   return <ProductCard data={p} key={p.id} />;
                 })}

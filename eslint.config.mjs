@@ -1,5 +1,7 @@
+import path from 'node:path';
 import eslintJs from '@eslint/js';
 import eslintPluginStorybook from 'eslint-plugin-storybook';
+import eslintPluginTailwindcss from 'eslint-plugin-tailwindcss';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 import importPlugin from 'eslint-plugin-import';
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -11,6 +13,15 @@ const eslintConfig = defineConfig(
   eslintJs.configs.recommended,
   ...nextVitals,
   ...nextTs,
+  ...eslintPluginTailwindcss.configs['flat/recommended'],
+  {
+    name: 'Tailwindcss/settings',
+    settings: {
+      tailwindcss: {
+        config: path.resolve('src/styles/globals.css'),
+      },
+    },
+  },
   prettier,
   globalIgnores([
     '**/build/',

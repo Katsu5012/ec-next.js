@@ -47,7 +47,7 @@ export const OrderHistory: React.FC = () => {
 
   if (fetching) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
@@ -55,7 +55,7 @@ export const OrderHistory: React.FC = () => {
 
   if (error) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8">
         <p className="text-destructive">注文履歴の取得に失敗しました。</p>
       </div>
     );
@@ -64,20 +64,20 @@ export const OrderHistory: React.FC = () => {
   const orders = data?.orders ?? [];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">注文履歴</h1>
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <h1 className="mb-8 text-3xl font-bold text-gray-900">注文履歴</h1>
 
       {orders.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-muted-foreground text-lg mb-2">注文履歴がありません</p>
-          <p className="text-muted-foreground text-sm">ご注文後、こちらに履歴が表示されます</p>
+        <div className="py-16 text-center">
+          <p className="mb-2 text-lg text-muted-foreground">注文履歴がありません</p>
+          <p className="text-sm text-muted-foreground">ご注文後、こちらに履歴が表示されます</p>
         </div>
       ) : (
         <div className="space-y-6">
           {orders.map((order) => (
             <Card key={order.id}>
               {/* 注文ヘッダー */}
-              <div className="bg-muted px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center justify-between gap-3 bg-muted px-6 py-4">
                 <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                   <div>
                     <span className="font-medium text-gray-900">注文番号: </span>
@@ -122,9 +122,9 @@ export const OrderHistory: React.FC = () => {
               <Separator />
 
               {/* 合計 */}
-              <div className="bg-muted px-6 py-4 flex justify-end">
+              <div className="flex justify-end bg-muted px-6 py-4">
                 <div className="text-right">
-                  <span className="text-muted-foreground mr-4">合計金額</span>
+                  <span className="mr-4 text-muted-foreground">合計金額</span>
                   <span className="text-xl font-bold text-gray-900">
                     ¥{order.totalPrice.toLocaleString()}
                   </span>

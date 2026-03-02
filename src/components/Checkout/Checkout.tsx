@@ -86,13 +86,13 @@ export const Checkout: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">購入手続き</h1>
+    <div className="mx-auto max-w-5xl px-4 py-8">
+      <h1 className="mb-8 text-3xl font-bold text-gray-900">購入手続き</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {/* 左カラム: 注文内容サマリー */}
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-4">注文内容</h2>
+          <h2 className="mb-4 text-xl font-bold text-gray-900">注文内容</h2>
           <Card className="mb-4">
             <CardContent className="p-0">
               {cartItems.map((item, index) => (
@@ -102,11 +102,11 @@ export const Checkout: React.FC = () => {
                     <img
                       src={item.product.imageUrl}
                       alt={item.product.name}
-                      className="w-16 h-16 object-cover rounded-lg"
+                      className="h-16 w-16 rounded-lg object-cover"
                     />
                     <div className="flex-1">
-                      <p className="font-semibold text-gray-900 text-sm">{item.product.name}</p>
-                      <p className="text-muted-foreground text-xs">
+                      <p className="text-sm font-semibold text-gray-900">{item.product.name}</p>
+                      <p className="text-xs text-muted-foreground">
                         ¥{item.product.price.toLocaleString()} × {item.quantity}個
                       </p>
                     </div>
@@ -121,12 +121,12 @@ export const Checkout: React.FC = () => {
 
           <Card>
             <CardContent className="p-4">
-              <div className="flex justify-between text-muted-foreground mb-2">
+              <div className="mb-2 flex justify-between text-muted-foreground">
                 <span>商品数</span>
                 <span>{totalItems}個</span>
               </div>
               <Separator className="my-2" />
-              <div className="flex justify-between text-xl font-bold text-gray-900 pt-1">
+              <div className="flex justify-between pt-1 text-xl font-bold text-gray-900">
                 <span>合計金額</span>
                 <span>¥{totalPrice.toLocaleString()}</span>
               </div>
@@ -136,10 +136,10 @@ export const Checkout: React.FC = () => {
 
         {/* 右カラム: 配送先フォーム */}
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-4">配送先情報</h2>
+          <h2 className="mb-4 text-xl font-bold text-gray-900">配送先情報</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Card>
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="space-y-4 p-6">
                 {/* 氏名 */}
                 <div>
                   <Label htmlFor="name">氏名</Label>

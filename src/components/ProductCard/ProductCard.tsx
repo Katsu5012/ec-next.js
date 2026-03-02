@@ -48,23 +48,23 @@ export const ProductCard = ({ data }: Props) => {
 
   return (
     <Link href={`/products/detail?productId=${product.id}`}>
-      <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+      <Card className="overflow-hidden transition-shadow hover:shadow-lg">
         <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover" />
+          <img src={product.imageUrl} alt={product.name} className="h-48 w-full object-cover" />
           {inCart ? (
             <Badge className="absolute top-2 right-2">カート内: {cartQuantity}個</Badge>
           ) : null}
         </div>
 
         <CardContent className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">{product.name}</h3>
 
           {product.description ? (
-            <p className="text-gray-600 text-sm mb-3">{product.description}</p>
+            <p className="mb-3 text-sm text-gray-600">{product.description}</p>
           ) : null}
 
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4 flex items-center justify-between">
             <span className="text-2xl font-bold text-gray-900">
               ¥{product.price.toLocaleString()}
             </span>

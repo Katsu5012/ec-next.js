@@ -21,5 +21,11 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "tailwindCSS.validate": true,
+  "tailwindCSS.lint.invalidTailwindDirective": "warning",
+  "tailwindCSS.lint.invalidConfigPath": "warning",
+  "tailwindCSS.lint.invalidScreen": "warning",
+  "tailwindCSS.lint.invalidVariant": "warning",
+  "tailwindCSS.lint.recommendedVariantOrder": "warning"
 }

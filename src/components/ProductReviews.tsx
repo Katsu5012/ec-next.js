@@ -46,10 +46,10 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
     <Card className="shadow-lg">
       <CardContent className="p-6">
         {/* ヘッダー */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">カスタマーレビュー</h2>
-            <div className="flex items-center gap-4 mt-2">
+            <div className="mt-2 flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <span className="text-3xl font-bold text-yellow-500">
                   {reviewsData.averageRating.toFixed(1)}
@@ -84,7 +84,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
         {/* レビューリスト */}
         <div className="space-y-4">
           {reviewsData.reviews.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">まだレビューがありません</div>
+            <div className="py-12 text-center text-muted-foreground">まだレビューがありません</div>
           ) : (
             reviewsData.reviews.map((review, index) => (
               <React.Fragment key={review.id}>
@@ -109,7 +109,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
 
   return (
     <div className="pb-4">
-      <div className="flex items-center gap-4 mb-2">
+      <div className="mb-2 flex items-center gap-4">
         <span className="font-semibold text-gray-900">{review.userName}</span>
         <div className="flex text-yellow-500">
           {[...Array(5)].map((_, i) => (

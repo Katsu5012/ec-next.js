@@ -33,19 +33,19 @@ export const Header: React.FC = () => {
           : 'products';
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      <div className="mx-auto max-w-7xl px-4 py-4">
         <div className="flex items-center justify-between">
           {/* ロゴ・タイトル */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <ShoppingBag className="w-8 h-8 text-primary" />
+          <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+            <ShoppingBag className="h-8 w-8 text-primary" />
             <h1 className="text-2xl font-bold text-gray-900">ECサイト</h1>
           </Link>
 
           {/* ナビゲーション */}
           <nav className="flex items-center gap-6">
             {/* ページインジケーター */}
-            <div className="hidden md:flex items-center gap-2 text-sm">
+            <div className="hidden items-center gap-2 text-sm md:flex">
               {(['products', 'quantity', 'cart', 'checkout'] as const).map((page, i) => {
                 const labels = {
                   products: '商品一覧',
@@ -68,9 +68,9 @@ export const Header: React.FC = () => {
             <Link
               href="/cart"
               suppressHydrationWarning
-              className="relative p-2 hover:bg-muted rounded-lg transition-colors"
+              className="relative rounded-lg p-2 transition-colors hover:bg-muted"
             >
-              <ShoppingCart className="w-6 h-6 text-gray-700" />
+              <ShoppingCart className="h-6 w-6 text-gray-700" />
               {mounted && totalItems > 0 && user ? (
                 <span
                   className={cn(
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
                 <span className="text-sm">{user.name}</span>
                 <Link
                   href="/orders"
-                  className="text-sm text-gray-700 hover:text-primary transition-colors"
+                  className="text-sm text-gray-700 transition-colors hover:text-primary"
                 >
                   注文履歴
                 </Link>
