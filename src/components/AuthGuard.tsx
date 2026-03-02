@@ -1,5 +1,4 @@
 // src/components/AuthGuard.tsx
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Lock, Loader2 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
@@ -11,22 +10,15 @@ interface AuthGuardProps {
 }
 
 export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
-
-  useEffect(() => {
-    // 初回チェック完了
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsChecking(false);
-  }, []);
 
   const handleLogin = () => {
     router.push(`/login?returnUrl=${encodeURIComponent(router.asPath)}`);
   };
 
-  // 初回チェック中はローディング表示
-  if (isChecking) {
+  // ログイン中はローディング表示
+  if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
