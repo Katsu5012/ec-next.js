@@ -42,14 +42,14 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ data }) => {
   return (
     <Card className="shadow-lg">
       <CardContent className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* 商品画像 */}
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={product.imageUrl}
               alt={product.name}
-              className="w-full h-96 object-cover rounded-lg"
+              className="h-96 w-full rounded-lg object-cover"
             />
           </div>
 
@@ -77,8 +77,8 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ data }) => {
               <>
                 <Separator />
                 <div>
-                  <h2 className="text-lg font-semibold mb-2 text-gray-900">商品説明</h2>
-                  <p className="text-gray-700 whitespace-pre-line">{product.description}</p>
+                  <h2 className="mb-2 text-lg font-semibold text-gray-900">商品説明</h2>
+                  <p className="whitespace-pre-line text-gray-700">{product.description}</p>
                 </div>
               </>
             ) : null}
@@ -86,7 +86,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ data }) => {
             {/* 数量選択 */}
             <Separator />
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">数量</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700">数量</label>
               <div className="flex items-center gap-3">
                 <Button
                   variant="outline"
@@ -97,7 +97,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ data }) => {
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="text-xl font-semibold w-12 text-center">{quantity}</span>
+                <span className="w-12 text-center text-xl font-semibold">{quantity}</span>
                 <Button
                   variant="outline"
                   size="icon"

@@ -48,8 +48,8 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md">
         <Card>
           <CardHeader className="text-center">
             <CardTitle role="heading" aria-level={2} className="text-3xl">
@@ -115,7 +115,7 @@ export const Login: React.FC<LoginProps> = ({ onSuccess }) => {
               {/* デモ用情報 */}
               <Alert>
                 <AlertDescription>
-                  <p className="font-semibold mb-1">デモ用アカウント</p>
+                  <p className="mb-1 font-semibold">デモ用アカウント</p>
                   <p className="text-xs">
                     メール: demo@example.com
                     <br />

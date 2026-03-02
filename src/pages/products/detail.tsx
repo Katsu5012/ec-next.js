@@ -39,7 +39,7 @@ export default function ProductDetailPage() {
     return (
       <AuthGuard>
         <Header />
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
           <Loader2 className="h-12 w-12 animate-spin text-primary" />
         </div>
       </AuthGuard>
@@ -50,7 +50,7 @@ export default function ProductDetailPage() {
     return (
       <AuthGuard>
         <Header />
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
           <div className="text-center">
             <Alert variant="destructive" className="mb-4">
               <AlertDescription>エラーが発生しました: {error.message}</AlertDescription>
@@ -68,9 +68,9 @@ export default function ProductDetailPage() {
     return (
       <AuthGuard>
         <Header />
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
           <div className="text-center">
-            <p className="text-muted-foreground mb-4">商品が見つかりませんでした</p>
+            <p className="mb-4 text-muted-foreground">商品が見つかりませんでした</p>
             <Link href="/" className="text-primary hover:underline">
               トップページに戻る
             </Link>
@@ -84,7 +84,7 @@ export default function ProductDetailPage() {
     <AuthGuard>
       <Header />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8">
         {/* パンくずリスト */}
         <nav className="mb-6">
           <ol className="flex items-center gap-2 text-sm">

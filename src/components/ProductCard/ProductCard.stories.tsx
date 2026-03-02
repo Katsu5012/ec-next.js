@@ -222,7 +222,7 @@ export const CartBadgeInteraction: Story = {
 // ✅ すべての商品を一覧表示
 export const AllProducts: StoryWithoutArgs = {
   render: () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+    <div className="grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {mockProducts.map((product) => (
         <ProductCard key={product.id} data={createMockProductCard(product)} />
       ))}

@@ -28,7 +28,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   // 初回チェック中はローディング表示
   if (isChecking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
@@ -37,18 +37,18 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   // ログインしていない場合はメッセージとボタン表示
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <div className="max-w-md w-full text-center">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+        <div className="w-full max-w-md text-center">
           <Card className="shadow-lg">
             <CardContent className="p-8">
               {/* アイコン */}
-              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-4">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
                 <Lock className="h-8 w-8 text-blue-600" />
               </div>
 
               {/* メッセージ */}
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">ログインが必要です</h2>
-              <p className="text-gray-600 mb-6">このページを表示するには、ログインしてください</p>
+              <h2 className="mb-2 text-2xl font-bold text-gray-900">ログインが必要です</h2>
+              <p className="mb-6 text-gray-600">このページを表示するには、ログインしてください</p>
 
               {/* ログインボタン */}
               <Button onClick={handleLogin} size="lg" className="w-full">

@@ -12,11 +12,11 @@ export default function OrderCompletePage() {
       <Header />
       <main>
         <AuthGuard>
-          <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-            <CheckCircle className="mx-auto h-24 w-24 text-green-500 mb-6" />
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">ご注文ありがとうございます</h1>
-            <p className="text-muted-foreground mb-2">ご注文を受け付けました。</p>
-            <p className="text-muted-foreground mb-10">
+          <div className="mx-auto max-w-2xl px-4 py-16 text-center">
+            <CheckCircle className="mx-auto mb-6 h-24 w-24 text-green-500" />
+            <h1 className="mb-4 text-3xl font-bold text-gray-900">ご注文ありがとうございます</h1>
+            <p className="mb-2 text-muted-foreground">ご注文を受け付けました。</p>
+            <p className="mb-10 text-muted-foreground">
               確認メールをお送りしますので、しばらくお待ちください。
             </p>
             <Button size="lg" onClick={() => router.push('/')}>
