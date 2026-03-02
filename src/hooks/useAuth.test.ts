@@ -135,8 +135,9 @@ describe('useAuth', () => {
       result.current.logout();
     });
 
+    // useSyncExternalStore ベースのため、null は "null" として保存される
     const authState = localStorage.getItem('auth-state');
-    expect(authState).toBeNull();
+    expect(JSON.parse(authState!)).toBeNull();
   });
 
   it('ログイン中はisLoadingがtrueになる', async () => {

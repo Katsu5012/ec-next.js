@@ -10,7 +10,12 @@
       "Bash(pnpm lint)",
       "Bash(pnpm format)",
       "Bash(npm run codegen)",
-      "Bash(npm test -- --reporter=verbose src/components/OrderHistory/OrderHistory.test.tsx)"
+      "Bash(npm test -- --reporter=verbose src/components/OrderHistory/OrderHistory.test.tsx)",
+      "WebFetch(domain:www.eslint-react.xyz)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm view @eslint-react/eslint-plugin peerDependencies --json)",
+      "Bash(npm view @eslint-react/eslint-plugin@latest peerDependencies --json)",
+      "Bash(npm view @eslint-react/eslint-plugin@latest version)"
     ],
     "deny": [
       "Bash(rm*)",
