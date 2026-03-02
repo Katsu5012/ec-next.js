@@ -1,6 +1,5 @@
-// src/components/AuthGuard.tsx
 import { useRouter } from 'next/router';
-import { Lock } from 'lucide-react';
+import { Loader2, Lock } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,12 +9,21 @@ interface AuthGuardProps {
 }
 
 export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
   const handleLogin = () => {
     router.push(`/login?returnUrl=${encodeURIComponent(router.asPath)}`);
   };
+
+  // ログイン中はローディング表示
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   // ログインしていない場合はメッセージとボタン表示
   if (!isAuthenticated) {
